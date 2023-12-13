@@ -1,0 +1,23 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 3em;
+  box-shadow: 0 8px 28px 0 #78B1B51A;
+
+  img {
+    max-width: 100%;
+    height: 64px;
+  }
+}
+
+.menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  >div{
+    margin-right: 32px;
+  }
+}
+

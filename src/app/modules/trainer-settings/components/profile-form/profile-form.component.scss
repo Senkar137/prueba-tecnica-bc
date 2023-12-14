@@ -1,0 +1,36 @@
+.profile-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  height: 100%;
+
+  h3{
+    font-family: Poppins, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 48px;
+    color: #01426A;
+  }
+
+  p{
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    color: #AAAAAA;
+  }
+}
+
+.profile-form form{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  button{
+    max-width: 70%;
+    min-width: 60%;
+    cursor: pointer;
+  }
+}

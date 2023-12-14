@@ -14,6 +14,7 @@ import { PokemonListEffects } from './core/store/effects/pokemon-list.effects';
 import { pokemonListReducer } from './core/store/reducers/pokemon-list.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { trainerReducer } from './core/store/reducers/trainer.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,10 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    StoreModule.forRoot({ pokemonList: pokemonListReducer }),
+    StoreModule.forRoot({
+      pokemonList: pokemonListReducer,
+      trainer: trainerReducer,
+    }),
     EffectsModule.forRoot([PokemonListEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

@@ -1,3 +1,17 @@
 {
-  "loading": "Cargando..."
+  "loading": "Cargando...",
+  "trainer-settings": {
+    "title": "¡Hola! Configuremos tu perfil",
+    "message": "Queremos conocerte mejor.",
+    "select-image-title": "Imagen perfil",
+    "select-image-dropbox": "Adjunta una foto",
+    "form-title": "Tu información",
+    "form-message": "Completa la siguiente información para completar tu perfil",
+    "form-continue": "Continuar",
+    "form-name": "Nombre",
+    "form-hobby": "Pasatiempo favorito",
+    "form-birth": "Cumpleaños",
+    "form-dui": "DUI",
+    "form-minority": "Carned de Minoridad"
+  }
 }

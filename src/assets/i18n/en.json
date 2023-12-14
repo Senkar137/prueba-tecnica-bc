@@ -1,3 +1,17 @@
 {
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "trainer-settings": {
+    "title": "¡Hello! Let's set up your profile",
+    "message": "We want to know you better.",
+    "select-image-title": "Profile image",
+    "select-image-dropbox": "Attach a photo",
+    "form-title": "Your Information",
+    "form-message": "Complete the following information to fill out your profile",
+    "form-continue": "Continue",
+    "form-name": "Name",
+    "form-hobby": "Favorite Hobby",
+    "form-birth": "Birthday",
+    "form-dui": "DUI",
+    "form-minority": "Minority Card"
+  }
 }

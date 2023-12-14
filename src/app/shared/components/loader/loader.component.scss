@@ -1,0 +1,16 @@
+.loader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  p{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 53px;
+    letter-spacing: 0;
+    text-align: center;
+    color: #185A7D;
+  }
+}

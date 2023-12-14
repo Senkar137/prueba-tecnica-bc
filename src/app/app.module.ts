@@ -9,6 +9,11 @@ import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { ApiResponseInterceptor } from './core/interceptors/api-response.interceptor';
+import { EffectsModule } from '@ngrx/effects';
+import { PokemonListEffects } from './core/store/effects/pokemon-list.effects';
+import { pokemonListReducer } from './core/store/reducers/pokemon-list.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +21,12 @@ import { ApiResponseInterceptor } from './core/interceptors/api-response.interce
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ pokemonList: pokemonListReducer }),
+    EffectsModule.forRoot([PokemonListEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     TranslocoRootModule,
     HttpClientModule,
     CoreModule,

@@ -9,6 +9,11 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
+import { loadTrainerInfoSuccess } from '../../../../core/store/actions/trainer.actions';
+import { Store } from '@ngrx/store';
+import { TrainerState } from '../../../../core/store/reducers/trainer.reducer';
+import { TrainerProfile } from '../../../../core/interfaces/trainer-profile';
 
 @Component({
   selector: 'app-profile-form',
@@ -19,6 +24,7 @@ export class ProfileFormComponent {
   profileForm: FormGroup;
 
   isMinor = false;
+  isImageUploaded = false;
 
   selectable = true;
   removable = true;
@@ -32,13 +38,19 @@ export class ProfileFormComponent {
     'Jugar Fifa',
     'Jugar Videojuegos',
   ];
-  filteredHobbies: Observable<string[] | null> = of(this.allHobby);
+
+  filteredHobbies$: Observable<string[] | null> = of(this.allHobby);
+  trainerInfo$: Observable<TrainerProfile | null>;
 
   myFilter = (d: Date | null): boolean => {
     return d !== null && d < new Date();
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store<{ trainer: TrainerState }>
+  ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       favoriteHobby: [['']],
@@ -47,27 +59,38 @@ export class ProfileFormComponent {
       minorityCard: [''],
     });
 
+    this.trainerInfo$ = store.select('trainer', 'trainer');
+
+    this.trainerInfo$.subscribe(res => {
+      this.isImageUploaded = !!res?.imageUrl;
+    });
+
     this.profileForm
       .get('dui')
       ?.setValidators([Validators.required, this.validateDui.bind(this)]);
 
     this.getFormControl('birthdate').valueChanges.subscribe(res => {
-      const years =
-        (new Date().getTime() - res.getTime()) / (1000 * 60 * 60 * 24 * 365.3);
+      if (res) {
+        const years =
+          (new Date().getTime() - res.getTime()) /
+          (1000 * 60 * 60 * 24 * 365.3);
 
-      this.isMinor = years < 18;
+        this.isMinor = years < 18;
 
-      if (this.isMinor) {
-        this.getFormControl('dui').clearValidators();
-        this.getFormControl('dui').updateValueAndValidity();
-        this.getFormControl('minorityCard').setValidators(Validators.required);
-      } else {
-        this.getFormControl('minorityCard').clearValidators();
-        this.getFormControl('minorityCard').updateValueAndValidity();
-        this.getFormControl('dui').setValidators([
-          Validators.required,
-          this.validateDui.bind(this),
-        ]);
+        if (this.isMinor) {
+          this.getFormControl('dui').clearValidators();
+          this.getFormControl('dui').updateValueAndValidity();
+          this.getFormControl('minorityCard').setValidators(
+            Validators.required
+          );
+        } else {
+          this.getFormControl('minorityCard').clearValidators();
+          this.getFormControl('minorityCard').updateValueAndValidity();
+          this.getFormControl('dui').setValidators([
+            Validators.required,
+            this.validateDui.bind(this),
+          ]);
+        }
       }
     });
 
@@ -108,8 +131,8 @@ export class ProfileFormComponent {
       });
     });
 
-    this.getFormControl('favoriteHobby').valueChanges.subscribe(res => {
-      this.filteredHobbies = of(
+    this.getFormControl('favoriteHobby').valueChanges.subscribe(() => {
+      this.filteredHobbies$ = of(
         this.allHobby.filter(item => !this.hobbies.includes(item))
       );
     });
@@ -174,20 +197,28 @@ export class ProfileFormComponent {
     this.getFormControl('favoriteHobby').setValue(this.hobbies);
   }
 
+  forceShow = true;
   saveCoachProfile(): void {
-    this.getFormControl('name').setValue(
-      this.getFormControl('name').value.trim()
-    );
+    if ((!this.profileForm.valid || !this.isImageUploaded) && this.forceShow) {
+      this.forceShow = false;
+      return;
+    }
 
-    console.log(this.profileForm);
-    console.log('----------------');
-    console.log(this.profileForm.value);
+    if (this.profileForm.valid && this.isImageUploaded) {
+      this.getFormControl('name').setValue(
+        this.getFormControl('name').value.trim()
+      );
 
-    // if (this.profileForm.valid) {
-    //   const coachProfileData = this.profileForm.value;
-    //   console.log('Guardando perfil del entrenador:', coachProfileData);
-    // } else {
-    //   console.log('Formulario no válido');
-    // }
+      this.store.dispatch(
+        loadTrainerInfoSuccess({
+          info: {
+            ...this.profileForm.value,
+            isMinor: this.isMinor,
+          },
+        })
+      );
+
+      this.router.navigate(['/team-formation']);
+    }
   }
 }

@@ -1,4 +1,3 @@
-// pokemon.actions.ts
 import { createAction, props } from '@ngrx/store';
 import { PokemonList } from '../../interfaces/pokemon-list';
 

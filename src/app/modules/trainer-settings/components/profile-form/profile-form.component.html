@@ -32,7 +32,7 @@
           #auto="matAutocomplete"
           (optionSelected)="selected($event)">
           <mat-option
-            *ngFor="let hobby of filteredHobbies | async"
+            *ngFor="let hobby of filteredHobbies$ | async"
             [value]="hobby">
             {{ hobby }}
           </mat-option>
@@ -71,7 +71,7 @@
       </ng-template>
 
       <button
-        [disabled]="!profileForm.valid"
+        [disabled]="!forceShow && (!profileForm.valid || !isImageUploaded)"
         mat-flat-button
         color="accent"
         (click)="saveCoachProfile()">

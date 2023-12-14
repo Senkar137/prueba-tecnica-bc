@@ -1,0 +1,64 @@
+.image-selector{
+  background-color: #ffc600;
+  width: 392px;
+  height: 600px;
+  border-radius: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h3{
+    font-family: Poppins, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 45px;
+  }
+
+  img{
+    background-color: #E7EFF5;
+    margin: 24px 0 32px 0;
+    width: 269px;
+    height: 269px;
+    border: 14px white solid;
+    border-radius: 100%;
+    object-fit: cover; // a mi gusto se ve mejor
+  }
+
+  .img-logo-default{
+    max-width: 139px;
+    max-height: 139px;
+    padding: 65px;
+  }
+
+.input-upload-image {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.input-display{
+  background-color: white;
+  border: 2px black dashed;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  padding: 22px 16px;
+  cursor: pointer;
+
+  span{
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #2C85BC;
+  }
+}
+
+}

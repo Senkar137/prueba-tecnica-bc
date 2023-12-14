@@ -13,5 +13,17 @@
     "form-birth": "Birthday",
     "form-dui": "DUI",
     "form-minority": "Minority Card"
+  },
+  "team-formation": {
+    "title": "We're almost done!",
+    "message": "Review the information and complete the requested details.",
+    "profile-hobby": "Hobby:",
+    "profile-age": "Age:",
+    "age": "years old",
+    "profile-dui": "DUI:",
+    "list-title": "Pokémon",
+    "list-message": "Select 3 Pokémon to be part of your team",
+    "list-save": "Save",
+    "list-search-placeholder": "Search by index, name..."
   }
 }

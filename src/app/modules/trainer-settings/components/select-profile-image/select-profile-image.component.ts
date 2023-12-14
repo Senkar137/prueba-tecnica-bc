@@ -33,9 +33,12 @@ export class SelectProfileImageComponent {
       const imageUrl = URL.createObjectURL(file);
       this.selectedImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
 
-      this.store.dispatch(
-        loadTrainerImageSuccess({ image: String(this.selectedImage) })
-      );
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result as string;
+        this.store.dispatch(loadTrainerImageSuccess({ image: base64Image }));
+      };
+      reader.readAsDataURL(file);
     }
     inputElement.value = '';
   }

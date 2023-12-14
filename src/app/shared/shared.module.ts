@@ -13,6 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TrainerProfileComponent } from './components/trainer-profile/trainer-profile.component';
 
 const modules = [
   CommonModule,
@@ -31,9 +32,11 @@ const modules = [
   MatNativeDateModule,
 ];
 
+const components = [LoaderComponent, TrainerProfileComponent];
+
 @NgModule({
   imports: [modules],
-  declarations: [LoaderComponent],
-  exports: [modules, LoaderComponent],
+  declarations: [components],
+  exports: [modules, components],
 })
 export class SharedModule {}

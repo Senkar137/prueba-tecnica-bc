@@ -1,18 +1,26 @@
-<header>
-  <img src="assets/images/header-logo.png" alt="pokemon-logo" />
+<section style="display: flex; flex-direction: column; height: 100%">
+  <header>
+    <img src="assets/images/header-logo.png" alt="pokemon-logo" />
 
-  <section class="menu">
-    <div [hidden]="true">
-      <button mat-raised-button color="accent">PRESS</button>
-    </div>
+    <section class="menu">
+      <div [hidden]="true">
+        <button mat-raised-button color="accent">PRESS</button>
+      </div>
 
-    <div class="language-switch-container">
-      <mat-slide-toggle color="primary" (change)="toggleLanguage()">
-        <span *ngIf="isSpanish">ES</span>
-        <span *ngIf="!isSpanish">EN</span>
-      </mat-slide-toggle>
-    </div>
-  </section>
-</header>
+      <div class="language-switch-container">
+        <mat-slide-toggle color="primary" (change)="toggleLanguage()">
+          <span *ngIf="isSpanish">ES</span>
+          <span *ngIf="!isSpanish">EN</span>
+        </mat-slide-toggle>
+      </div>
+    </section>
+  </header>
 
-<router-outlet></router-outlet>
+  <app-loader
+    style="flex: 1"
+    *ngIf="showLoader$ | async; else elseBlock"></app-loader>
+
+  <ng-template #elseBlock>
+    <router-outlet></router-outlet>
+  </ng-template>
+</section>

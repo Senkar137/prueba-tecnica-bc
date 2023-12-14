@@ -5,10 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LoaderComponent } from './components/loader/loader.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 const modules = [
   CommonModule,
   FormsModule,
+  TranslocoModule,
   MatIconModule,
   MatDividerModule,
   MatButtonModule,
@@ -17,7 +20,7 @@ const modules = [
 
 @NgModule({
   imports: [modules],
-  declarations: [],
-  exports: [modules],
+  declarations: [LoaderComponent],
+  exports: [modules, LoaderComponent],
 })
 export class SharedModule {}

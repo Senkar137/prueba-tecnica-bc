@@ -22,6 +22,10 @@ export class ApiResponseInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map(response => {
         if (response instanceof HttpResponse) {
+          if (response.url?.includes('assets/i18n/')) {
+            return response;
+          }
+
           const apiResponse: ApiResponse<any> = {
             errorMessage: null,
             statusCode: response.status,

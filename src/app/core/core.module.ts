@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LocalStorageService } from './services/local-storage.service';
+import { PokeApiService } from './services/poke-api.service';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [],
+  providers: [LocalStorageService, PokeApiService],
 })
 export class CoreModule {}

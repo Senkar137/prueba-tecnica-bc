@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
+import { PokeApiService } from './core/services/poke-api.service';
 
 @Component({
   selector: 'app-root',

@@ -18,7 +18,7 @@
   ;
   }
 
-  img{
+  .img-user{
     background-color: #E7EFF5;
     margin: 24px 0 32px 0;
     width: 232px;
@@ -47,5 +47,24 @@
       line-height: 36px;
     }
   }
+}
 
+.profile-especial{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+
+  h4{
+    font-family: Poppins,sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #4B4B4B;
+  }
+
+  >img{
+    width: 59px;
+    height: 53.1px;
+  }
 }

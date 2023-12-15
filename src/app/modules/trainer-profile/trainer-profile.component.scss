@@ -1,0 +1,31 @@
+.head{
+  margin: 32px 0 0 72px;
+
+  h1{
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 53px;
+    letter-spacing: 0;
+    color: #185A7D;
+  }
+
+  p{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #AAAAAA;
+  }
+}
+
+.container{
+  display: flex;
+  justify-content: space-around;
+  margin: 12px 0;
+  flex-wrap: wrap;
+
+  >*{
+    margin: 12px 0 0 0;
+  }
+}

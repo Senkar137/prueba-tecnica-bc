@@ -13,10 +13,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { TrainerProfileComponent } from './components/trainer-profile/trainer-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CoreModule } from '../core/core.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const modules = [
   CommonModule,
@@ -36,9 +37,10 @@ const modules = [
   MatNativeDateModule,
   ScrollingModule,
   MatPaginatorModule,
+  CarouselModule,
 ];
 
-const components = [LoaderComponent, TrainerProfileComponent];
+const components = [LoaderComponent, ProfileComponent];
 
 @NgModule({
   imports: [modules],

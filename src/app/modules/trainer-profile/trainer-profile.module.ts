@@ -3,9 +3,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
 import { TrainerProfileComponent } from './trainer-profile.component';
+import { TeamComponent } from './components/team/team.component';
 
 @NgModule({
-  declarations: [TrainerProfileComponent],
+  declarations: [TrainerProfileComponent, TeamComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([

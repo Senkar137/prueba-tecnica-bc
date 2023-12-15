@@ -1,0 +1,49 @@
+<section class="profile-container">
+  <ng-container *transloco="let t; read: 'trainer-profile'">
+    <h3>{{ t('team-title') }}</h3>
+
+    <div class="team-container">
+      <ng-container *ngFor="let pokemon of pokemonTeam$ | async">
+        <div class="team-item">
+          <div class="tc-left">
+            <img [src]="pokemon.sprite" [alt]="pokemon.name + 'sprite front'" />
+            <h4>{{ pokemon.name }}</h4>
+            <p>{{ pokemon.types ? pokemon.types[0] : '' }}</p>
+          </div>
+          <div class="tc-right">
+            <ng-container *ngFor="let stat of pokemon.stats">
+              <div>
+                <span>{{ stat.name }}</span>
+                <span>{{ stat.value }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!--    <owl-carousel-o [options]="customOptions">-->
+    <!--      <ng-container *ngFor="let pokemon of pokemonTeam$ | async">-->
+    <!--        <ng-template carouselSlide>-->
+    <!--          <div class="team-container">-->
+    <!--            <div class="tc-left">-->
+    <!--              <img-->
+    <!--                [src]="pokemon.sprite"-->
+    <!--                [alt]="pokemon.name + 'sprite front'" />-->
+    <!--              <h4>{{ pokemon.name }}</h4>-->
+    <!--              <p>{{ pokemon.types ? pokemon.types[0] : '' }}</p>-->
+    <!--            </div>-->
+    <!--            <div class="tc-right">-->
+    <!--              <ng-container *ngFor="let stat of pokemon.stats">-->
+    <!--                <div>-->
+    <!--                  <span>{{ stat.name }}</span>-->
+    <!--                  <span>{{ stat.value }}</span>-->
+    <!--                </div>-->
+    <!--              </ng-container>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </ng-template>-->
+    <!--      </ng-container>-->
+    <!--    </owl-carousel-o>-->
+  </ng-container>
+</section>

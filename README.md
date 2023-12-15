@@ -1,27 +1,90 @@
-# PruebaTecnica
+# Prueba Técnica - Configuración del Proyecto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+Este archivo README proporciona instrucciones detalladas sobre cómo configurar y ejecutar el proyecto "prueba-tecnica-cuscatlan" basado en Angular 12.2.0.
 
-## Development server
+## Requisitos Previos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Asegúrese de tener instaladas las siguientes herramientas antes de comenzar:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/) (versión 14.x o superior) (Utilize nvm, use e instale la version 14 de nvm)
+  ```bash
+   nvm install 14
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+   nvm use 14.21.3
+   ```
+- [npm](https://www.npmjs.com/) (se instala con Node.js)
+- [Angular CLI](https://angular.io/cli) (instale globalmente mediante `npm install -g @angular/cli@12`)
 
-## Build
+## Pasos de Configuración
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Clonar el Repositorio**
 
-## Running unit tests
+   ```bash
+   git clone https://url-del-repositorio/prueba-tecnica.git
+   cd prueba-tecnica
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. **Instalar Dependencias**
 
-## Running end-to-end tests
+   ```bash
+   npm install
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. **Configuración de Husky**
 
-## Further help
+   Antes de ejecutar cualquier comando, instale Husky:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   ```bash
+   npm run prepare
+   ```
+
+4. **Ejecutar la Aplicación**
+
+   ```bash
+   ng serve
+   ```
+
+   Esto iniciará la aplicación en modo de desarrollo. Abra su navegador y vaya a `http://localhost:4200/` para ver la aplicación en funcionamiento.
+
+5. **Compilar la Aplicación para Producción**
+
+   ```bash
+   npm run build
+   ```
+
+   Esto generará la versión de producción en el directorio `dist/`.
+
+6. **Ejecutar Pruebas Unitarias**
+
+   ```bash
+   npm test
+   ```
+
+7. **Ejecutar Linter**
+
+   ```bash
+   ng lint
+   ```
+
+## Scripts Útiles
+
+- **Modo de Desarrollo con Recarga Automática**
+
+  ```bash
+  npm run watch
+  ```
+
+## Dependencias Principales
+
+- **Angular:** 12.2.0
+- **Angular Material:** 12.2.13
+- **Transloco:** 3.1.4
+- **NgRx:** 12.5.1
+- **Owl Carousel:** 6.0.2
+
+## Desarrolladores
+
+- **Nombre del Desarrollador:** Oscar Enrique Orellana Monterrosa
+- **Contacto:** orellana.monterrosa.o@gmail.com
+
+---

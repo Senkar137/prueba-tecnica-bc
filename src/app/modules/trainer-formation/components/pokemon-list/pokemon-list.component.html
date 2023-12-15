@@ -1,0 +1,56 @@
+<section class="formation-container">
+  <ng-container *transloco="let t; read: 'team-formation'">
+    <h3>{{ t('list-title') }}</h3>
+    <p>{{ t('list-message') }}</p>
+
+    <div
+      class="pokemon-list-container"
+      *ngIf="(loading$ | async) === false; else elseBlock">
+      <ng-container
+        *ngFor="let pokemon of (pokemonList$ | async)?.results; index as i">
+        <div
+          class="rectangle"
+          [ngClass]="{
+            'selected-pokemon':
+              pokemon.id && teamMembersId.includes(pokemon.id),
+            opa: isFullTeam
+          }"
+          (click)="saveThisPokemon(pokemon)">
+          <img [src]="pokemon.sprite" [alt]="pokemon.name + ' sprint front'" />
+          <p>
+            <span>{{ pokemon.id | pokemonId }}</span>
+            <span>{{ pokemon.name }}</span>
+          </p>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-template #elseBlock>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 339px;
+        ">
+        <h3 style="text-align: center">{{ 'loading' | transloco }}</h3>
+      </div>
+    </ng-template>
+
+    <mat-paginator
+      hidePageSize="true"
+      [length]="151"
+      [pageSize]="9"
+      (page)="changePage($event)"
+      aria-label="Select page">
+    </mat-paginator>
+
+    <button
+      [disabled]="!isFullTeam"
+      mat-flat-button
+      color="accent"
+      (click)="saveTeam()">
+      {{ t('list-save') }}
+    </button>
+  </ng-container>
+</section>

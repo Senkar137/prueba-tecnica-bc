@@ -25,6 +25,7 @@ export class ProfileFormComponent {
 
   isMinor = false;
   isImageUploaded = false;
+  actualAge: number = 0;
 
   selectable = true;
   removable = true;
@@ -75,6 +76,7 @@ export class ProfileFormComponent {
           (new Date().getTime() - res.getTime()) /
           (1000 * 60 * 60 * 24 * 365.3);
 
+        this.actualAge = Math.floor(years);
         this.isMinor = years < 18;
 
         if (this.isMinor) {
@@ -157,7 +159,9 @@ export class ProfileFormComponent {
 
     if (
       actualValue.length > 9 ||
-      (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+      (ASCIICode > 31 &&
+        (ASCIICode < 48 || ASCIICode > 57) &&
+        (ASCIICode < 96 || ASCIICode > 105))
     ) {
       event.preventDefault();
     }
@@ -214,6 +218,7 @@ export class ProfileFormComponent {
           info: {
             ...this.profileForm.value,
             isMinor: this.isMinor,
+            age: this.actualAge,
           },
         })
       );

@@ -1,4 +1,4 @@
-<section style="display: flex; flex-direction: column; height: 100%">
+<section>
   <header>
     <img src="assets/images/header-logo.png" alt="pokemon-logo" />
 
@@ -16,11 +16,7 @@
     </section>
   </header>
 
-  <app-loader
-    style="flex: 1"
-    *ngIf="showLoader$ | async; else elseBlock"></app-loader>
+  <app-loader *ngIf="showLoader$ | async"></app-loader>
 
-  <ng-template #elseBlock>
-    <router-outlet></router-outlet>
-  </ng-template>
+  <router-outlet></router-outlet>
 </section>

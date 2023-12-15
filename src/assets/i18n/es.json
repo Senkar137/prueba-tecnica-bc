@@ -13,5 +13,17 @@
     "form-birth": "Cumpleaños",
     "form-dui": "DUI",
     "form-minority": "Carned de Minoridad"
+  },
+  "team-formation": {
+    "title": "¡Ya casi términamos!",
+    "message": "Revisa la información, y completa lo solicitado.",
+    "profile-hobby": "Pasatiempo:",
+    "profile-age": "Edad:",
+    "age": "años",
+    "profile-dui": "DUI:",
+    "list-title": "Pokémon",
+    "list-message": "Selecciona 3 Pokémon para que sean parte de tu equipo",
+    "list-save": "Guardar",
+    "list-search-placeholder": "Buscar por índice, nombre..."
   }
 }

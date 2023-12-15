@@ -10,8 +10,8 @@ export class PokemonListEffects {
   loadPokemonList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PokemonListActions.loadPokemonList),
-      mergeMap(() =>
-        this.pokeApiService.getPokemonList().pipe(
+      mergeMap(props =>
+        this.pokeApiService.getPokemonList(props.limit, props.offset).pipe(
           map(list =>
             PokemonListActions.loadPokemonListSuccess({ list: list.data })
           ),

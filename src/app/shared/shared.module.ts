@@ -13,9 +13,14 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TrainerProfileComponent } from './components/trainer-profile/trainer-profile.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CoreModule } from '../core/core.module';
 
 const modules = [
   CommonModule,
+  CoreModule,
   TranslocoModule,
   FormsModule,
   ReactiveFormsModule,
@@ -29,11 +34,15 @@ const modules = [
   MatAutocompleteModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  ScrollingModule,
+  MatPaginatorModule,
 ];
+
+const components = [LoaderComponent, TrainerProfileComponent];
 
 @NgModule({
   imports: [modules],
-  declarations: [LoaderComponent],
-  exports: [modules, LoaderComponent],
+  declarations: [components],
+  exports: [modules, components],
 })
 export class SharedModule {}

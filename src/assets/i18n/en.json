@@ -1,0 +1,37 @@
+{
+  "loading": "Loading...",
+  "trainer-settings": {
+    "title": "¡Hello! Let's set up your profile",
+    "message": "We want to know you better.",
+    "select-image-title": "Profile image",
+    "select-image-dropbox": "Attach a photo",
+    "form-title": "Your Information",
+    "form-message": "Complete the following information to fill out your profile",
+    "form-continue": "Continue",
+    "form-name": "Name",
+    "form-hobby": "Favorite Hobby",
+    "form-birth": "Birthday",
+    "form-dui": "DUI",
+    "form-minority": "Minority Card"
+  },
+  "team-formation": {
+    "title": "We're almost done!",
+    "message": "Review the information and complete the requested details.",
+    "card-trainer": "Trainer",
+    "profile-hobby": "Hobby:",
+    "profile-age": "Age:",
+    "age": "years old",
+    "profile-dui": "DUI:",
+    "list-title": "Pokémon",
+    "list-message": "Select 3 Pokémon to be part of your team",
+    "list-save": "Save",
+    "list-search-placeholder": "Search by index, name..."
+  },
+  "trainer-profile": {
+    "title-name": "¡Hi ",
+    "card-trainer": "Trainer",
+    "team-title": "My Pokémon",
+    "edit-profile": "Edit profile",
+    "edit-team": "Edit"
+  }
+}

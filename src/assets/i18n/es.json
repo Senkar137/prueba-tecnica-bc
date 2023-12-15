@@ -1,0 +1,37 @@
+{
+  "loading": "Cargando...",
+  "trainer-settings": {
+    "title": "¡Hola! Configuremos tu perfil",
+    "message": "Queremos conocerte mejor.",
+    "select-image-title": "Imagen perfil",
+    "select-image-dropbox": "Adjunta una foto",
+    "form-title": "Tu información",
+    "form-message": "Completa la siguiente información para completar tu perfil",
+    "form-continue": "Continuar",
+    "form-name": "Nombre",
+    "form-hobby": "Pasatiempo favorito",
+    "form-birth": "Cumpleaños",
+    "form-dui": "DUI",
+    "form-minority": "Carned de Minoridad"
+  },
+  "team-formation": {
+    "title": "¡Ya casi términamos!",
+    "message": "Revisa la información, y completa lo solicitado.",
+    "card-trainer": "Entrenador",
+    "profile-hobby": "Pasatiempo:",
+    "profile-age": "Edad:",
+    "age": "años",
+    "profile-dui": "DUI:",
+    "list-title": "Pokémon",
+    "list-message": "Selecciona 3 Pokémon para que sean parte de tu equipo",
+    "list-save": "Guardar",
+    "list-search-placeholder": "Buscar por índice, nombre..."
+  },
+  "trainer-profile": {
+    "title-name": "¡Hola ",
+    "card-trainer": "Entrenador",
+    "team-title": "Mis Pokémon",
+    "edit-profile":"Editar perfil",
+    "edit-team":"Editar"
+  }
+}

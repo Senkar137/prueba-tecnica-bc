@@ -1,0 +1,33 @@
+<section class="profile-trainer">
+  <ng-container *transloco="let t; read: 'team-formation'">
+    <h3 *ngIf="!isProfile; else elseBlock">
+      {{ (trainerInfo$ | async)?.name | titlecase }}
+    </h3>
+
+    <ng-template #elseBlock>
+      <div class="profile-especial">
+        <h4>
+          {{ t('card-trainer') }}
+        </h4>
+        <img src="assets/svg/medal.svg" alt="little icon medal" />
+      </div>
+    </ng-template>
+
+    <img
+      class="img-user"
+      [src]="(trainerInfo$ | async)?.imageUrl"
+      alt="trainer profile image" />
+    <p>
+      <span>{{ t('profile-hobby') }} </span>
+      <span>{{ (trainerInfo$ | async)?.favoriteHobby?.[0] }}</span>
+    </p>
+    <p>
+      <span>{{ t('profile-age') }} </span>
+      <span>{{ (trainerInfo$ | async)?.age }} {{ t('age') }}</span>
+    </p>
+    <p *ngIf="!(trainerInfo$ | async)?.isMinor">
+      <span>{{ t('profile-dui') }} </span>
+      <span>{{ (trainerInfo$ | async)?.dui }}</span>
+    </p>
+  </ng-container>
+</section>

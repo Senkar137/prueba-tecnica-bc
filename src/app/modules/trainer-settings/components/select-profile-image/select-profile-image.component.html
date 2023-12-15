@@ -1,0 +1,31 @@
+<section class="image-selector">
+  <ng-container *transloco="let t; read: 'trainer-settings'">
+    <h3>{{ t('select-image-title') }}</h3>
+    <img
+      [ngClass]="{ 'img-logo-default': !isUpload }"
+      [src]="selectedImage || 'assets/svg/user.svg'"
+      alt="default profile user" />
+
+    <input
+      class="input-upload-image"
+      name="upload-image"
+      id="upload-image"
+      type="file"
+      (change)="onFileSelected($event)"
+      accept="image/*" />
+    <label
+      *ngIf="!isUpload; else elseBlock"
+      class="input-display"
+      for="upload-image">
+      <span>{{ t('select-image-dropbox') }}</span>
+      <mat-icon color="accent">cloud_upload</mat-icon>
+    </label>
+
+    <ng-template #elseBlock>
+      <label class="input-display" (click)="removeSelection()">
+        <span>{{ imageName }}</span>
+        <mat-icon color="warn">restore_from_trash</mat-icon>
+      </label>
+    </ng-template>
+  </ng-container>
+</section>

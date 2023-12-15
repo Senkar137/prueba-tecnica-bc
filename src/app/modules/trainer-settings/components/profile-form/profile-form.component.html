@@ -1,0 +1,82 @@
+<section class="profile-form">
+  <ng-container *transloco="let t; read: 'trainer-settings'">
+    <h3>{{ t('form-title') }}</h3>
+    <p>{{ t('form-message') }}</p>
+    <form [formGroup]="profileForm">
+      <mat-form-field appearance="outline" color="accent" style="width: 100%">
+        <mat-label>{{ t('form-name') }}<span>*</span></mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent" style="width: 100%">
+        <mat-label>{{ t('form-hobby') }}</mat-label>
+        <mat-chip-list #chipList aria-label="hobby selection">
+          <mat-chip
+            *ngFor="let hobby of hobbies"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(hobby)">
+            {{ hobby }}
+            <button matChipRemove *ngIf="removable">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            formControlName="favoriteHobby"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)">
+          <mat-option
+            *ngFor="let hobby of filteredHobbies$ | async"
+            [value]="hobby">
+            {{ hobby }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent" style="width: 100%">
+        <mat-label>{{ t('form-birth') }}</mat-label>
+        <input
+          matInput
+          [matDatepickerFilter]="myFilter"
+          [matDatepicker]="picker"
+          formControlName="birthdate" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="!isMinor; else elseBlock"
+        appearance="outline"
+        color="accent"
+        style="width: 100%">
+        <mat-label>{{ t('form-dui') }}<span>*</span></mat-label>
+        <input
+          (keydown)="onlyDigits($event)"
+          matInput
+          type="text"
+          formControlName="dui" />
+      </mat-form-field>
+
+      <ng-template #elseBlock>
+        <mat-form-field appearance="outline" color="accent" style="width: 100%">
+          <mat-label>{{ t('form-minority') }}<span>*</span></mat-label>
+          <input matInput type="text" formControlName="minorityCard" />
+        </mat-form-field>
+      </ng-template>
+
+      <button
+        [disabled]="!forceShow && (!profileForm.valid || !isImageUploaded)"
+        mat-flat-button
+        color="accent"
+        (click)="saveCoachProfile()">
+        {{ t('form-continue') }}
+      </button>
+    </form>
+  </ng-container>
+</section>

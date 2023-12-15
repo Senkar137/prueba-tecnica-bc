@@ -27,6 +27,7 @@ export class PokeApiService {
     return {
       name: pokemon.name,
       url: url,
+      id: pokemon.id,
       sprite: pokemon.sprites.front_default,
       types: pokemon.types.map(typeItem => typeItem.type.name),
       stats: pokeStats,

@@ -1,4 +1,3 @@
-// pokemon.state.ts
 import { createReducer, on } from '@ngrx/store';
 import { PokemonList } from '../../interfaces/pokemon-list';
 import {

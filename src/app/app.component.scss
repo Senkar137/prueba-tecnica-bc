@@ -4,6 +4,8 @@ header{
   align-items: center;
   padding: 1.5em 3em;
   box-shadow: 0 8px 28px 0 #78B1B51A;
+  position: relative;
+  z-index: 20;
 
   img {
     max-width: 100%;
@@ -20,5 +22,3 @@ header{
     margin-right: 32px;
   }
 }
-
-

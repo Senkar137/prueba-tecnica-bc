@@ -15,6 +15,7 @@ import { pokemonListReducer } from './core/store/reducers/pokemon-list.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { trainerReducer } from './core/store/reducers/trainer.reducer';
+import { pokemonTeamReducer } from './core/store/reducers/pokemon-team.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { trainerReducer } from './core/store/reducers/trainer.reducer';
     StoreModule.forRoot({
       pokemonList: pokemonListReducer,
       trainer: trainerReducer,
+      pokemonTeam: pokemonTeamReducer,
     }),
     EffectsModule.forRoot([PokemonListEffects]),
     StoreDevtoolsModule.instrument({

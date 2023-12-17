@@ -20,6 +20,11 @@ import { environment } from '../environments/environment';
 import { trainerReducer } from './core/store/reducers/trainer.reducer';
 import { pokemonTeamReducer } from './core/store/reducers/pokemon-team.reducer';
 import { recoverState } from './core/store/reducers/meta-reducers';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { PokeApiService } from './core/services/poke-api.service';
+import { LoaderPokeBallService } from './core/services/loader-pokeball.service';
+
+const services = [LocalStorageService, PokeApiService, LoaderPokeBallService];
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +52,7 @@ import { recoverState } from './core/store/reducers/meta-reducers';
     SharedModule,
   ],
   providers: [
+    services,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiResponseInterceptor,

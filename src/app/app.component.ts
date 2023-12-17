@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { LoaderService } from './core/services/loader.service';
+import { LoaderPokeBallService } from './core/services/loader-pokeball.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,11 @@ import { LoaderService } from './core/services/loader.service';
 })
 export class AppComponent {
   isSpanish: boolean = true;
-  showLoader$ = this.loaderService.loader$;
+  showLoader$: Observable<boolean> = this.loaderPokeBallService.loader$;
 
   constructor(
-    private translocoService: TranslocoService,
-    private loaderService: LoaderService
+    private loaderPokeBallService: LoaderPokeBallService,
+    private translocoService: TranslocoService
   ) {}
 
   toggleLanguage(): void {

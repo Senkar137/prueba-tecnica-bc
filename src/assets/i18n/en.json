@@ -1,7 +1,7 @@
 {
   "loading": "Loading...",
   "trainer-settings": {
-    "title": "¡Hello! Let's set up your profile",
+    "title": "Hi! Let's set up your profile",
     "message": "We want to know you better.",
     "select-image-title": "Profile image",
     "select-image-dropbox": "Attach a photo",
@@ -28,7 +28,7 @@
     "list-search-placeholder": "Search by index, name..."
   },
   "trainer-profile": {
-    "title-name": "¡Hi ",
+    "title-name": "Hi ",
     "card-trainer": "Trainer",
     "team-title": "My Pokémon",
     "edit-profile": "Edit profile",

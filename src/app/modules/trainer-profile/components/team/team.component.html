@@ -7,14 +7,23 @@
         <div class="team-item">
           <div class="tc-left">
             <img [src]="pokemon.sprite" [alt]="pokemon.name + 'sprite front'" />
-            <h4>{{ pokemon.name }}</h4>
-            <p>{{ pokemon.types ? pokemon.types[0] : '' }}</p>
+            <h4>{{ pokemon.name | titlecase }}</h4>
+            <p>{{ pokemon.types | listTypes }}</p>
           </div>
           <div class="tc-right">
             <ng-container *ngFor="let stat of pokemon.stats">
               <div>
-                <span>{{ stat.name }}</span>
-                <span>{{ stat.value }}</span>
+                <span>{{ stat.name | titlecase }}</span>
+
+                <mat-progress-bar
+                  mode="determinate"
+                  style="
+                    width: 32%;
+                    height: 8px;
+                    margin-right: 24px;
+                    border-radius: 16px;
+                  "
+                  [value]="stat.percentageBar || stat.value"></mat-progress-bar>
               </div>
             </ng-container>
           </div>

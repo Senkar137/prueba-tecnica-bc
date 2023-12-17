@@ -19,7 +19,7 @@
           <img [src]="pokemon.sprite" [alt]="pokemon.name + ' sprint front'" />
           <p>
             <span>{{ pokemon.id | pokemonId }}</span>
-            <span>{{ pokemon.name }}</span>
+            <span>{{ pokemon.name | titlecase }}</span>
           </p>
         </div>
       </ng-container>

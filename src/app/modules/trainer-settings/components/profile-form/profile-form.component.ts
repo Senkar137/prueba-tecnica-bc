@@ -145,7 +145,7 @@ export class ProfileFormComponent {
   }
 
   onlyDigits(event: KeyboardEvent) {
-    let ASCIICode = event.which ? event.which : event.keyCode;
+    let ASCIICode = event.which || event.keyCode;
     const actualValue = this.getFormControl('dui').value;
 
     if (

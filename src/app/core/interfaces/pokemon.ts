@@ -1,3 +1,5 @@
+import { PokemonStats } from './pokemon-details';
+
 export interface Pokemon {
   abilities: Ability[];
   base_experience: number;
@@ -172,7 +174,7 @@ export interface Other {
 export interface Stat {
   base_stat: number;
   effort: number;
-  stat: Species;
+  stat: PokemonStats;
 }
 
 export interface Type {

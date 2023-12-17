@@ -19,6 +19,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { trainerReducer } from './core/store/reducers/trainer.reducer';
 import { pokemonTeamReducer } from './core/store/reducers/pokemon-team.reducer';
+import { recoverState } from './core/store/reducers/meta-reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,11 +28,14 @@ import { pokemonTeamReducer } from './core/store/reducers/pokemon-team.reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    StoreModule.forRoot({
-      pokemonList: pokemonListReducer,
-      trainer: trainerReducer,
-      pokemonTeam: pokemonTeamReducer,
-    }),
+    StoreModule.forRoot(
+      {
+        pokemonList: pokemonListReducer,
+        trainer: trainerReducer,
+        pokemonTeam: pokemonTeamReducer,
+      },
+      { metaReducers: [recoverState] }
+    ),
     EffectsModule.forRoot([PokemonListEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

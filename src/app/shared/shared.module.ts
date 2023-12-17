@@ -18,6 +18,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CoreModule } from '../core/core.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const modules = [
   CommonModule,
@@ -38,6 +39,7 @@ const modules = [
   ScrollingModule,
   MatPaginatorModule,
   CarouselModule,
+  MatProgressBarModule,
 ];
 
 const components = [LoaderComponent, ProfileComponent];

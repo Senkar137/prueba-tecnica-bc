@@ -45,7 +45,7 @@ export class PokemonListComponent implements OnInit {
     });
 
     this.pokemonTeam$.subscribe(res => {
-      this.teamMembersId = res.map(item => (item.id ? item.id : 0));
+      this.teamMembersId = res.map(item => item.id || 0);
       this.isFullTeam = this.teamMembersId.length === 3;
     });
   }

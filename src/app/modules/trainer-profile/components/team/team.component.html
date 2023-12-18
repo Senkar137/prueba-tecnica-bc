@@ -1,6 +1,13 @@
 <section class="profile-container">
   <ng-container *transloco="let t; read: 'trainer-profile'">
-    <h3>{{ t('team-title') }}</h3>
+    <div class="head">
+      <h3>{{ t('team-title') }}</h3>
+
+      <button routerLink="/team-formation" mat-stroked-button color="accent">
+        <mat-icon color="accent">create</mat-icon>
+        {{ t('edit-team') }}
+      </button>
+    </div>
 
     <div class="team-container">
       <ng-container *ngFor="let pokemon of pokemonTeam$ | async">

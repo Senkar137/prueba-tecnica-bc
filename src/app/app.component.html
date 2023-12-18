@@ -7,6 +7,36 @@
         <button mat-raised-button color="accent">PRESS</button>
       </div>
 
+      <ng-container *transloco="let t; read: 'trainer-menu'">
+        <button
+          *ngIf="showTrainerMenu"
+          mat-stroked-button
+          color="accent"
+          style="margin-right: 64px"
+          [matMenuTriggerFor]="trainerMenu">
+          {{ trainerName.split(' ')[0] | titlecase }}
+          <mat-icon color="accent">keyboard_arrow_down</mat-icon>
+        </button>
+
+        <mat-menu #trainerMenu="matMenu" xPosition="before">
+          <!--          <button mat-menu-item [matMenuTriggerFor]="switchMenu">-->
+          <!--            {{ t('switch') }}-->
+          <!--          </button>-->
+
+          <!--          <button mat-menu-item>{{ t('new') }}</button>-->
+
+          <button mat-menu-item (click)="removeTrainer()">
+            {{ t('discard') }}
+          </button>
+        </mat-menu>
+
+        <mat-menu #switchMenu="matMenu" xPosition="before">
+          <button mat-menu-item>EXIT</button>
+          <button mat-menu-item>EXIT</button>
+          <button mat-menu-item>EXIT</button>
+        </mat-menu>
+      </ng-container>
+
       <div class="language-switch-container">
         <mat-slide-toggle color="primary" (change)="toggleLanguage()">
           <span *ngIf="isSpanish">ES</span>

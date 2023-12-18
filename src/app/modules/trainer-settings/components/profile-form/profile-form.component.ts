@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -14,6 +14,16 @@ import { loadTrainerInfoSuccess } from '../../../../core/store/actions/trainer.a
 import { Store } from '@ngrx/store';
 import { TrainerProfile } from '../../../../core/interfaces/trainer-profile';
 import { AppState } from '../../../../core/store/states/app.state';
+import { selectTFTrainer } from '../../../../core/store/selectors/main.selector';
+import { hasRequiredInfo } from '../../../../core/guards/trainer-registration.guard';
+
+interface ProfileForm {
+  name: string;
+  favoriteHobby: string[];
+  birthdate: Date | null;
+  dui: string;
+  minorityCard: string;
+}
 
 @Component({
   selector: 'app-profile-form',
@@ -21,14 +31,18 @@ import { AppState } from '../../../../core/store/states/app.state';
   styleUrls: ['./profile-form.component.scss'],
 })
 export class ProfileFormComponent {
+  @Input() isNotEdit = true;
+
   profileForm: FormGroup;
 
   isMinor = false;
   isImageUploaded = false;
-  actualAge: number = 0;
-
+  forceShowButton = true;
   selectable = true;
   removable = true;
+
+  actualAge: number = 0;
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbies: string[] = [];
   allHobby: string[] = [
@@ -53,50 +67,56 @@ export class ProfileFormComponent {
     private store: Store<AppState>
   ) {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      favoriteHobby: [['']],
-      birthdate: ['', Validators.required],
-      dui: [''],
-      minorityCard: [''],
-    });
+      name: '',
+      favoriteHobby: [],
+      birthdate: null,
+      dui: '',
+      minorityCard: '',
+    } as ProfileForm);
 
-    this.profileForm
-      .get('dui')
-      ?.setValidators([Validators.required, this.validateDui.bind(this)]);
+    this.getFormControl('name').setValidators([Validators.required]);
 
-    this.trainerInfo$ = store.select('trainer', 'trainer');
+    this.getFormControl('birthdate').setValidators([Validators.required]);
+
+    this.getFormControl('dui').setValidators([
+      Validators.required,
+      this.validateDui.bind(this),
+    ]);
+
+    this.trainerInfo$ = this.store.select(selectTFTrainer);
 
     this.trainerInfo$.subscribe(res => {
+      if (!!res && hasRequiredInfo(res)) {
+        if (!(res.birthdate instanceof Date)) {
+          res = {
+            ...res,
+            birthdate: new Date(res.birthdate as unknown as string),
+          };
+        }
+
+        this.profileForm.patchValue({
+          name: res.name,
+          birthdate: res.birthdate,
+          dui: res.dui,
+          minorityCard: res.minorityCard,
+        } as ProfileForm);
+
+        this.updateBirthdateInfo(res.birthdate as Date);
+      }
       this.isImageUploaded = !!res?.imageUrl;
     });
 
+    this.checkFormControlsData();
+  }
+
+  checkFormControlsData() {
     this.getFormControl('birthdate').valueChanges.subscribe(res => {
-      if (res) {
-        const years =
-          (new Date().getTime() - res.getTime()) /
-          (1000 * 60 * 60 * 24 * 365.3);
-
-        this.actualAge = Math.floor(years);
-        this.isMinor = years < 18;
-
-        if (this.isMinor) {
-          this.getFormControl('dui').clearValidators();
-          this.getFormControl('dui').updateValueAndValidity();
-          this.getFormControl('minorityCard').setValidators(
-            Validators.required
-          );
-        } else {
-          this.getFormControl('minorityCard').clearValidators();
-          this.getFormControl('minorityCard').updateValueAndValidity();
-          this.getFormControl('dui').setValidators([
-            Validators.required,
-            this.validateDui.bind(this),
-          ]);
-        }
+      if (res && res instanceof Date) {
+        this.updateBirthdateInfo(res);
       }
     });
 
-    this.getFormControl('dui').valueChanges.subscribe(res => {
+    this.getFormControl('dui').valueChanges.subscribe((res: string) => {
       const newRes = res.replace(/[^\d-]/g, '');
 
       if (newRes.length === 9 && !newRes.includes('-')) {
@@ -112,16 +132,18 @@ export class ProfileFormComponent {
       }
     });
 
-    this.getFormControl('minorityCard').valueChanges.subscribe(res => {
-      this.getFormControl('minorityCard').setValue(
-        res.replace(/[^\da-zA-Z-]/g, ''),
-        {
-          emitEvent: false,
-        }
-      );
-    });
+    this.getFormControl('minorityCard').valueChanges.subscribe(
+      (res: string) => {
+        this.getFormControl('minorityCard').setValue(
+          res.replace(/[^\da-zA-Z-]/g, ''),
+          {
+            emitEvent: false,
+          }
+        );
+      }
+    );
 
-    this.getFormControl('name').valueChanges.subscribe(res => {
+    this.getFormControl('name').valueChanges.subscribe((res: string) => {
       let newRes = res.replace(/[^a-zA-Z ]/g, '');
 
       if (newRes.trim().length === 0) {
@@ -142,6 +164,26 @@ export class ProfileFormComponent {
 
   getFormControl(control: string): AbstractControl {
     return <AbstractControl>this.profileForm.get(control);
+  }
+
+  updateBirthdateInfo(date: Date) {
+    const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
+    const years = (new Date().getTime() - date.getTime()) / millisecondsInYear;
+    this.isMinor = years < 18;
+    this.actualAge = Math.floor(years);
+
+    if (this.isMinor) {
+      this.getFormControl('dui').clearValidators();
+      this.getFormControl('dui').updateValueAndValidity();
+      this.getFormControl('minorityCard').setValidators(Validators.required);
+    } else {
+      this.getFormControl('minorityCard').clearValidators();
+      this.getFormControl('minorityCard').updateValueAndValidity();
+      this.getFormControl('dui').setValidators([
+        Validators.required,
+        this.validateDui.bind(this),
+      ]);
+    }
   }
 
   onlyDigits(event: KeyboardEvent) {
@@ -175,7 +217,7 @@ export class ProfileFormComponent {
   }
 
   validateDui(control: { value: string }): { [key: string]: any } | null {
-    const duiPattern = /^\d{8}-\d{1}$/;
+    const duiPattern = /^\d{8}-\d$/;
     const isValid = duiPattern.test(control.value);
 
     return isValid ? null : { invalidDui: true };
@@ -204,10 +246,13 @@ export class ProfileFormComponent {
     this.getFormControl('favoriteHobby').setValue(this.hobbies);
   }
 
-  forceShow = true;
-  saveCoachProfile(): void {
-    if ((!this.profileForm.valid || !this.isImageUploaded) && this.forceShow) {
-      this.forceShow = false;
+  saveCoachProfile(event: Event): void {
+    event.preventDefault();
+    if (
+      (!this.profileForm.valid || !this.isImageUploaded) &&
+      this.forceShowButton
+    ) {
+      this.forceShowButton = false;
       return;
     }
 
@@ -226,7 +271,9 @@ export class ProfileFormComponent {
         })
       );
 
-      this.router.navigate(['/team-formation']);
+      this.router.navigate(
+        this.isNotEdit ? ['/team-formation'] : ['/trainer-profile']
+      );
     }
   }
 }

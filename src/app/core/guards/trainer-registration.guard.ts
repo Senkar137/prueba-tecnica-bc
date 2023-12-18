@@ -7,6 +7,20 @@ import { Store } from '@ngrx/store';
 import { selectTFTrainer } from '../store/selectors/main.selector';
 import { TrainerProfile } from '../interfaces/trainer-profile';
 
+export function hasRequiredInfo(trainerInfo: TrainerProfile | null): boolean {
+  const haveDocument: boolean = !!(trainerInfo?.isMinor
+    ? trainerInfo.minorityCard
+    : trainerInfo?.dui);
+
+  return !!(
+    trainerInfo &&
+    trainerInfo.name &&
+    trainerInfo.birthdate &&
+    trainerInfo.imageUrl &&
+    haveDocument
+  );
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,24 +38,9 @@ export class TrainerRegistrationGuard implements CanActivate {
     return this.store.select(selectTFTrainer).pipe(
       map(trainerInfo => {
         return (
-          this.hasRequiredInfo(trainerInfo) ||
-          this.router.parseUrl('/configuration')
+          hasRequiredInfo(trainerInfo) || this.router.parseUrl('/configuration')
         );
       })
-    );
-  }
-
-  private hasRequiredInfo(trainerInfo: TrainerProfile | null): boolean {
-    const haveDocument: boolean = !!(trainerInfo?.isMinor
-      ? trainerInfo.minorityCard
-      : trainerInfo?.dui);
-
-    return !!(
-      trainerInfo &&
-      trainerInfo.name &&
-      trainerInfo.birthdate &&
-      trainerInfo.imageUrl &&
-      haveDocument
     );
   }
 }

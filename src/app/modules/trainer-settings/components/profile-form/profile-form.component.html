@@ -2,7 +2,7 @@
   <ng-container *transloco="let t; read: 'trainer-settings'">
     <h3>{{ t('form-title') }}</h3>
     <p>{{ t('form-message') }}</p>
-    <form [formGroup]="profileForm">
+    <form [formGroup]="profileForm" (submit)="saveCoachProfile($event)">
       <mat-form-field appearance="outline" color="accent" style="width: 100%">
         <mat-label>{{ t('form-name') }}<span>*</span></mat-label>
         <input matInput type="text" formControlName="name" />
@@ -71,11 +71,12 @@
       </ng-template>
 
       <button
-        [disabled]="!forceShow && (!profileForm.valid || !isImageUploaded)"
+        [disabled]="
+          !forceShowButton && (!profileForm.valid || !isImageUploaded)
+        "
         mat-flat-button
-        color="accent"
-        (click)="saveCoachProfile()">
-        {{ t('form-continue') }}
+        color="accent">
+        {{ isNotEdit ? t('form-continue') : t('form-continue-alter') }}
       </button>
     </form>
   </ng-container>

@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ListTypesPipe } from './pipes/list-types.pipe';
 import { PokemonIdPipe } from './pipes/pokemon-id.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 const pipes = [ListTypesPipe, PokemonIdPipe];
 
@@ -44,6 +45,7 @@ const modules = [
   CarouselModule,
   MatProgressBarModule,
   MatTooltipModule,
+  MatMenuModule,
 ];
 
 const components = [LoaderComponent, ProfileComponent];

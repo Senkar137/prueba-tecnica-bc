@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TrainerProfile } from '../../../core/interfaces/trainer-profile';
 import { AppState } from '../../../core/store/states/app.state';
+import { selectTFTrainer } from '../../../core/store/selectors/main.selector';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,6 @@ export class ProfileComponent {
   @Input() isProfile: boolean = false;
 
   constructor(private store: Store<AppState>) {
-    this.trainerInfo$ = store.select('trainer', 'trainer');
+    this.trainerInfo$ = this.store.select(selectTFTrainer);
   }
 }

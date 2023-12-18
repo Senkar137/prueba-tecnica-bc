@@ -7,4 +7,5 @@ export interface TrainerProfile {
   dui?: string | null;
   minorityCard?: string | null;
   imageUrl?: string | null;
+  imageName?: string | null;
 }

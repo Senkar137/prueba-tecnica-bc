@@ -10,7 +10,7 @@ export const loadTrainerInfoSuccess = createAction(
 );
 export const loadTrainerImageSuccess = createAction(
   '[Trainer] Load Trainer Image Success',
-  props<{ image: string | null }>()
+  props<{ image: string | null; name?: string }>()
 );
 
 export const loadTrainerInfoFailure = createAction(

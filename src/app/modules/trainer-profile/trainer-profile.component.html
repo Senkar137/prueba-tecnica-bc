@@ -3,6 +3,11 @@
     <h1>
       {{ t('title-name') }} {{ (trainerInfo$ | async)?.name | titlecase }}!
     </h1>
+
+    <button routerLink="/update-profile" mat-stroked-button color="accent">
+      <mat-icon color="accent">create</mat-icon>
+      {{ t('edit-profile') }}
+    </button>
   </div>
 </ng-container>
 

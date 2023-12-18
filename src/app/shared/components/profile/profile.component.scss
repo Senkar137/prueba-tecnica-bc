@@ -1,7 +1,7 @@
 .profile-trainer{
   background-color: #ffc600;
-  width: 392px;
-  height: 600px;
+  width: 432px;
+  min-height: 600px;
   border-radius: 50px;
 
   display: flex;
@@ -14,18 +14,19 @@
     font-size: 35px;
     font-weight: 700;
     line-height: 53px;
+    text-align: center;
+    padding: 2px 4px;
     color: #185A7D;
-  ;
   }
 
   .img-user{
     background-color: #E7EFF5;
-    margin: 24px 0 32px 0;
+    margin: 16px 0 24px 0;
     width: 232px;
     height: 232px;
     border: 14px white solid;
     border-radius: 100%;
-    object-fit: cover; // a mi gusto se ve mejor
+    object-fit: cover; // a mi gusta, se ve mejor
   }
 
   p{

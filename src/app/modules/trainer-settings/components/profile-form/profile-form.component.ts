@@ -12,7 +12,6 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { loadTrainerInfoSuccess } from '../../../../core/store/actions/trainer.actions';
 import { Store } from '@ngrx/store';
-import { TrainerState } from '../../../../core/store/reducers/trainer.reducer';
 import { TrainerProfile } from '../../../../core/interfaces/trainer-profile';
 import { AppState } from '../../../../core/store/states/app.state';
 
@@ -61,15 +60,15 @@ export class ProfileFormComponent {
       minorityCard: [''],
     });
 
+    this.profileForm
+      .get('dui')
+      ?.setValidators([Validators.required, this.validateDui.bind(this)]);
+
     this.trainerInfo$ = store.select('trainer', 'trainer');
 
     this.trainerInfo$.subscribe(res => {
       this.isImageUploaded = !!res?.imageUrl;
     });
-
-    this.profileForm
-      .get('dui')
-      ?.setValidators([Validators.required, this.validateDui.bind(this)]);
 
     this.getFormControl('birthdate').valueChanges.subscribe(res => {
       if (res) {
@@ -150,19 +149,22 @@ export class ProfileFormComponent {
     const actualValue = this.getFormControl('dui').value;
 
     if (
-      ASCIICode === 127 ||
-      ASCIICode === 8 ||
-      event.ctrlKey ||
-      event.metaKey
+      ASCIICode === 8 || // delete
+      ASCIICode === 9 || // tab
+      ASCIICode === 13 || // enter
+      ASCIICode === 127 || // delete
+      (ASCIICode >= 37 && ASCIICode <= 40) || // cursor keys
+      event.ctrlKey || // ctrl
+      event.metaKey // cmd
     ) {
       return;
     }
 
     if (
       actualValue.length > 9 ||
-      (ASCIICode > 31 &&
-        (ASCIICode < 48 || ASCIICode > 57) &&
-        (ASCIICode < 96 || ASCIICode > 105))
+      (ASCIICode > 31 && // numbers
+        (ASCIICode < 48 || ASCIICode > 57) && // numbers
+        (ASCIICode < 96 || ASCIICode > 105)) // numbers (numeric keypad)
     ) {
       event.preventDefault();
     }

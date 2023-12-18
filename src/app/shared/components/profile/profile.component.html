@@ -34,5 +34,13 @@
       <span>{{ t('profile-dui') }} </span>
       <span>{{ (trainerInfo$ | async)?.dui }}</span>
     </p>
+
+    <p
+      *ngIf="
+        (trainerInfo$ | async)?.isMinor && (trainerInfo$ | async)?.minorityCard
+      ">
+      <span>{{ t('minority') }} </span>
+      <span class="text-large">{{ (trainerInfo$ | async)?.minorityCard }}</span>
+    </p>
   </ng-container>
 </section>

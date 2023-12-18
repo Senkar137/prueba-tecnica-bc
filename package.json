@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:docker": "docker image build -t prueba-tecnica-image .",
+    "start:docker": "docker run -p 4200:4200 --rm prueba-tecnica-image",
     "prepare": "husky install",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

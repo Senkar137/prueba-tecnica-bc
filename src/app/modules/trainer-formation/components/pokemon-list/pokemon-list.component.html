@@ -6,8 +6,7 @@
     <div
       class="pokemon-list-container"
       *ngIf="(loading$ | async) === false; else elseBlock">
-      <ng-container
-        *ngFor="let pokemon of (pokemonList$ | async)?.results; index as i">
+      <ng-container *ngFor="let pokemon of pokemonList$ | async; index as i">
         <div
           class="rectangle"
           [ngClass]="{

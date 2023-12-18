@@ -14,6 +14,7 @@ import { loadTrainerInfoSuccess } from '../../../../core/store/actions/trainer.a
 import { Store } from '@ngrx/store';
 import { TrainerState } from '../../../../core/store/reducers/trainer.reducer';
 import { TrainerProfile } from '../../../../core/interfaces/trainer-profile';
+import { AppState } from '../../../../core/store/states/app.state';
 
 @Component({
   selector: 'app-profile-form',
@@ -50,7 +51,7 @@ export class ProfileFormComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private store: Store<{ trainer: TrainerState }>
+    private store: Store<AppState>
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],

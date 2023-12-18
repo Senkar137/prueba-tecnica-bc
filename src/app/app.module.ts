@@ -8,21 +8,18 @@ import {
 } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { ApiResponseInterceptor } from './core/interceptors/api-response.interceptor';
 import { EffectsModule } from '@ngrx/effects';
 import { PokemonListEffects } from './core/store/effects/pokemon-list.effects';
-import { pokemonListReducer } from './core/store/reducers/pokemon-list.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { trainerReducer } from './core/store/reducers/trainer.reducer';
-import { pokemonTeamReducer } from './core/store/reducers/pokemon-team.reducer';
 import { recoverState } from './core/store/reducers/meta-reducers';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { PokeApiService } from './core/services/poke-api.service';
 import { LoaderPokeBallService } from './core/services/loader-pokeball.service';
+import { APP_REDUCERS } from './core/store/states/app.state';
 
 const services = [LocalStorageService, PokeApiService, LoaderPokeBallService];
 
@@ -33,14 +30,7 @@ const services = [LocalStorageService, PokeApiService, LoaderPokeBallService];
     AppRoutingModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    StoreModule.forRoot(
-      {
-        pokemonList: pokemonListReducer,
-        trainer: trainerReducer,
-        pokemonTeam: pokemonTeamReducer,
-      },
-      { metaReducers: [recoverState] }
-    ),
+    StoreModule.forRoot(APP_REDUCERS, { metaReducers: [recoverState] }),
     EffectsModule.forRoot([PokemonListEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -48,7 +38,6 @@ const services = [LocalStorageService, PokeApiService, LoaderPokeBallService];
     }),
     TranslocoRootModule,
     HttpClientModule,
-    CoreModule,
     SharedModule,
   ],
   providers: [

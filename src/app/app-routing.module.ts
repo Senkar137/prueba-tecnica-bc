@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TrainerRegistrationGuard } from './core/guards/trainer-registration.guard';
+import { TeamGuard } from './core/guards/team.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'team-formation',
+    canActivate: [TrainerRegistrationGuard],
     loadChildren: () =>
       import('./modules/trainer-formation/trainer-formation.module').then(
         m => m.TrainerFormationModule
@@ -18,6 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'trainer-profile',
+    canActivate: [TeamGuard],
     loadChildren: () =>
       import('./modules/trainer-profile/trainer-profile.module').then(
         m => m.TrainerProfileModule

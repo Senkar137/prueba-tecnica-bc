@@ -16,13 +16,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CoreModule } from '../core/core.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ListTypesPipe } from './pipes/list-types.pipe';
+import { PokemonIdPipe } from './pipes/pokemon-id.pipe';
+
+const pipes = [ListTypesPipe, PokemonIdPipe];
 
 const modules = [
   CommonModule,
-  CoreModule,
   TranslocoModule,
   FormsModule,
   ReactiveFormsModule,
@@ -46,7 +48,7 @@ const components = [LoaderComponent, ProfileComponent];
 
 @NgModule({
   imports: [modules],
-  declarations: [components],
-  exports: [modules, components],
+  declarations: [components, pipes],
+  exports: [modules, components, pipes],
 })
 export class SharedModule {}

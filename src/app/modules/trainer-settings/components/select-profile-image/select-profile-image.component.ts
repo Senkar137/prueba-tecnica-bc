@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { TrainerState } from '../../../../core/store/reducers/trainer.reducer';
-import {
-  loadTrainerImage,
-  loadTrainerImageSuccess,
-} from '../../../../core/store/actions/trainer.actions';
+import { loadTrainerImageSuccess } from '../../../../core/store/actions/trainer.actions';
+import { AppState } from '../../../../core/store/states/app.state';
 
 @Component({
   selector: 'app-select-profile-image',
@@ -19,7 +16,7 @@ export class SelectProfileImageComponent {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private store: Store<{ trainer: TrainerState }>
+    private store: Store<AppState>
   ) {}
 
   onFileSelected(event: Event): void {

@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PokemonListState } from '../../../../core/store/reducers/pokemon-list.reducer';
 import { loadPokemonList } from '../../../../core/store/actions/pokemon-list.actions';
 import { Observable } from 'rxjs';
-import { PokemonList } from '../../../../core/interfaces/pokemon-list';
 import { PageEvent } from '@angular/material/paginator';
 import { PokemonDetails } from '../../../../core/interfaces/pokemon-details';
-import { PokemonTeamState } from '../../../../core/store/reducers/pokemon-team.reducer';
 import { loadPokemonTeamSuccess } from '../../../../core/store/actions/pokemon-team.actions';
 import { Router } from '@angular/router';
 import { LoaderPokeBallService } from '../../../../core/services/loader-pokeball.service';
+import { AppState } from '../../../../core/store/states/app.state';
+import {
+  selectPLFList,
+  selectPLFLoading,
+  selectPTFTeam,
+} from '../../../../core/store/selectors/main.selector';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -18,7 +21,7 @@ import { LoaderPokeBallService } from '../../../../core/services/loader-pokeball
 })
 export class PokemonListComponent implements OnInit {
   loading$: Observable<boolean>;
-  pokemonList$: Observable<PokemonList | null>;
+  pokemonList$: Observable<PokemonDetails[]>;
   pokemonTeam$: Observable<PokemonDetails[]>;
   teamMembersId: number[] = [];
   isFullTeam = false;
@@ -26,15 +29,12 @@ export class PokemonListComponent implements OnInit {
   constructor(
     private loaderPokeBallService: LoaderPokeBallService,
     private router: Router,
-    private store: Store<{
-      pokemonList: PokemonListState;
-      pokemonTeam: PokemonTeamState;
-    }>
+    private store: Store<AppState>
   ) {
     this.loaderPokeBallService.showLoader();
-    this.loading$ = this.store.select('pokemonList', 'loading');
-    this.pokemonList$ = this.store.select('pokemonList', 'list');
-    this.pokemonTeam$ = this.store.select('pokemonTeam', 'team');
+    this.loading$ = this.store.select(selectPLFLoading);
+    this.pokemonList$ = this.store.select(selectPLFList);
+    this.pokemonTeam$ = this.store.select(selectPTFTeam);
 
     this.pokemonTeam$.subscribe(res => {
       this.teamMembersId = res.map(item => item.id || 0);

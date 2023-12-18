@@ -5,6 +5,7 @@ import {
   loadPokemonTeamFailure,
   loadPokemonTeamSuccess,
 } from '../actions/pokemon-team.actions';
+import { environment } from '../../../../environments/environment';
 
 export interface PokemonTeamState {
   team: PokemonDetails[];
@@ -36,7 +37,7 @@ export const pokemonTeamReducer = createReducer(
 
     let updatedTeam = [...state.team, newMember];
 
-    if (updatedTeam.length > 3) {
+    if (updatedTeam.length > environment.numberPokemonPerTeam) {
       updatedTeam = updatedTeam.slice(1);
     }
 

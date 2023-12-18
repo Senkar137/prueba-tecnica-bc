@@ -8,16 +8,12 @@ import { selectTFTrainer } from '../store/selectors/main.selector';
 import { TrainerProfile } from '../interfaces/trainer-profile';
 
 export function hasRequiredInfo(trainerInfo: TrainerProfile | null): boolean {
-  const haveDocument: boolean = !!(trainerInfo?.isMinor
-    ? trainerInfo.minorityCard
-    : trainerInfo?.dui);
-
   return !!(
     trainerInfo &&
     trainerInfo.name &&
     trainerInfo.birthdate &&
     trainerInfo.imageUrl &&
-    haveDocument
+    (trainerInfo.isMinor || !!trainerInfo.dui)
   );
 }
 

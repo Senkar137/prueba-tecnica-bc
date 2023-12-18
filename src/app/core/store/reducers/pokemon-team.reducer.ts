@@ -19,6 +19,15 @@ export const initialState: PokemonTeamState = {
   error: null,
 };
 
+export const statsValueBar = {
+  hp: 255,
+  attack: 190,
+  defense: 230,
+  'special-attack': 194,
+  'special-defense': 230,
+  speed: 180,
+};
+
 export const pokemonTeamReducer = createReducer(
   initialState,
   on(loadPokemonTeam, state => ({ ...state, loading: true })),
@@ -53,12 +62,3 @@ export const pokemonTeamReducer = createReducer(
     loading: false,
   }))
 );
-
-export const statsValueBar = {
-  hp: 255,
-  attack: 190,
-  defense: 230,
-  'special-attack': 194,
-  'special-defense': 230,
-  speed: 180,
-};

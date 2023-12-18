@@ -175,10 +175,7 @@ export class ProfileFormComponent {
     if (this.isMinor) {
       this.getFormControl('dui').clearValidators();
       this.getFormControl('dui').updateValueAndValidity();
-      this.getFormControl('minorityCard').setValidators(Validators.required);
     } else {
-      this.getFormControl('minorityCard').clearValidators();
-      this.getFormControl('minorityCard').updateValueAndValidity();
       this.getFormControl('dui').setValidators([
         Validators.required,
         this.validateDui.bind(this),

@@ -19,11 +19,14 @@
         </button>
 
         <mat-menu #trainerMenu="matMenu" xPosition="before">
-          <!--          <button mat-menu-item [matMenuTriggerFor]="switchMenu">-->
-          <!--            {{ t('switch') }}-->
-          <!--          </button>-->
+          <button
+            *ngIf="trainerList.length > 0"
+            mat-menu-item
+            [matMenuTriggerFor]="switchMenu">
+            {{ t('switch') }}
+          </button>
 
-          <!--          <button mat-menu-item>{{ t('new') }}</button>-->
+          <button mat-menu-item (click)="newTrainer()">{{ t('new') }}</button>
 
           <button mat-menu-item (click)="removeTrainer()">
             {{ t('discard') }}
@@ -31,9 +34,11 @@
         </mat-menu>
 
         <mat-menu #switchMenu="matMenu" xPosition="before">
-          <button mat-menu-item>EXIT</button>
-          <button mat-menu-item>EXIT</button>
-          <button mat-menu-item>EXIT</button>
+          <ng-container *ngFor="let trainerItem of trainerList">
+            <button mat-menu-item (click)="switchTrainer(trainerItem)">
+              {{ trainerItem.name }}
+            </button>
+          </ng-container>
         </mat-menu>
       </ng-container>
 

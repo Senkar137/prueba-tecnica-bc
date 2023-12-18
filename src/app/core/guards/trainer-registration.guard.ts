@@ -12,7 +12,7 @@ export function hasRequiredInfo(trainerInfo: TrainerProfile | null): boolean {
     trainerInfo &&
     trainerInfo.name &&
     trainerInfo.birthdate &&
-    trainerInfo.imageUrl &&
+    // trainerInfo.imageUrl &&
     (trainerInfo.isMinor || !!trainerInfo.dui)
   );
 }

@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TrainerRegistrationGuard } from './core/guards/trainer-registration.guard';
+import { TeamGuard } from './core/guards/team.guard';
+import { RedirectGuard } from './core/guards/redirect.guard';
 
 const routes: Routes = [
   {
     path: 'configuration',
+    canActivate: [RedirectGuard],
     loadChildren: () =>
       import('./modules/trainer-settings/trainer-settings.module').then(
         m => m.TrainerSettingsModule
@@ -11,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'team-formation',
+    canActivate: [TrainerRegistrationGuard],
     loadChildren: () =>
       import('./modules/trainer-formation/trainer-formation.module').then(
         m => m.TrainerFormationModule
@@ -18,12 +23,25 @@ const routes: Routes = [
   },
   {
     path: 'trainer-profile',
+    canActivate: [TeamGuard],
     loadChildren: () =>
       import('./modules/trainer-profile/trainer-profile.module').then(
         m => m.TrainerProfileModule
       ),
   },
-  { path: '', redirectTo: '/configuration', pathMatch: 'full' },
+  {
+    path: 'update-profile',
+    canActivate: [TeamGuard],
+    loadChildren: () =>
+      import('./modules/trainer-settings/trainer-settings.module').then(
+        m => m.TrainerSettingsModule
+      ),
+  },
+  {
+    path: '',
+    redirectTo: '/configuration',
+    pathMatch: 'full',
+  },
   { path: '**', redirectTo: '/configuration' },
 ];
 

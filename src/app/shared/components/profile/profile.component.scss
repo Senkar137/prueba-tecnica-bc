@@ -1,7 +1,7 @@
 .profile-trainer{
   background-color: #ffc600;
-  width: 392px;
-  height: 600px;
+  width: 432px;
+  min-height: 600px;
   border-radius: 50px;
 
   display: flex;
@@ -14,22 +14,23 @@
     font-size: 35px;
     font-weight: 700;
     line-height: 53px;
+    text-align: center;
+    padding: 2px 4px;
     color: #185A7D;
-  ;
   }
 
   .img-user{
     background-color: #E7EFF5;
-    margin: 24px 0 32px 0;
+    margin: 16px 0 24px 0;
     width: 232px;
     height: 232px;
     border: 14px white solid;
     border-radius: 100%;
-    object-fit: cover; // a mi gusto se ve mejor
+    object-fit: cover; // a mi gusta, se ve mejor
   }
 
   p{
-    width: 88%;
+    width: 91%;
     font-family: Poppins, sans-serif;
     color: #4B4B4B;
     display: flex;
@@ -53,7 +54,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 78%;
 
   h4{
     font-family: Poppins,sans-serif;
@@ -67,4 +68,11 @@
     width: 59px;
     height: 53.1px;
   }
+}
+
+.text-large{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 145px;
 }

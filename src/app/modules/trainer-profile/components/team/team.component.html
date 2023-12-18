@@ -1,20 +1,40 @@
 <section class="profile-container">
   <ng-container *transloco="let t; read: 'trainer-profile'">
-    <h3>{{ t('team-title') }}</h3>
+    <div class="head">
+      <h3>{{ t('team-title') }}</h3>
+
+      <button routerLink="/team-formation" mat-stroked-button color="accent">
+        <mat-icon color="accent">create</mat-icon>
+        {{ t('edit-team') }}
+      </button>
+    </div>
 
     <div class="team-container">
       <ng-container *ngFor="let pokemon of pokemonTeam$ | async">
         <div class="team-item">
           <div class="tc-left">
             <img [src]="pokemon.sprite" [alt]="pokemon.name + 'sprite front'" />
-            <h4>{{ pokemon.name }}</h4>
-            <p>{{ pokemon.types ? pokemon.types[0] : '' }}</p>
+            <h4>{{ pokemon.name | titlecase }}</h4>
+            <p>{{ pokemon.types | listTypes }}</p>
           </div>
           <div class="tc-right">
             <ng-container *ngFor="let stat of pokemon.stats">
               <div>
-                <span>{{ stat.name }}</span>
-                <span>{{ stat.value }}</span>
+                <span>{{ t(stat.name) }}</span>
+
+                <mat-progress-bar
+                  [matTooltip]="stat.value.toString()"
+                  matTooltipPosition="left"
+                  matTooltipTouchGestures="auto"
+                  mode="determinate"
+                  style="
+                    width: 32%;
+                    height: 12px;
+                    margin-right: 24px;
+                    border-radius: 16px;
+                    cursor: help;
+                  "
+                  [value]="stat.percentageBar || stat.value"></mat-progress-bar>
               </div>
             </ng-container>
           </div>

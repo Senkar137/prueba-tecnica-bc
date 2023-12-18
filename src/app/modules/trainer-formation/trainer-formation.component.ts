@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/store/states/app.state';
+import { take } from 'rxjs/operators';
+import { selectPTFTeam } from '../../core/store/selectors/main.selector';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-trainer-formation',
@@ -6,5 +11,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./trainer-formation.component.scss'],
 })
 export class TrainerFormationComponent {
-  constructor() {}
+  isNotEdit = true;
+
+  constructor(private store: Store<AppState>) {
+    this.store
+      .select(selectPTFTeam)
+      .pipe(take(1))
+      .subscribe(res => {
+        this.isNotEdit = res.length !== environment.numberPokemonPerTeam;
+      });
+  }
 }

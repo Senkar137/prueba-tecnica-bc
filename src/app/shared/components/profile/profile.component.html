@@ -19,7 +19,12 @@
       alt="trainer profile image" />
     <p>
       <span>{{ t('profile-hobby') }} </span>
-      <span>{{ (trainerInfo$ | async)?.favoriteHobby?.[0] }}</span>
+      <span
+        [matTooltip]="(trainerInfo$ | async)?.favoriteHobby | listTypes"
+        matTooltipPosition="right"
+        matTooltipTouchGestures="auto"
+        >{{ (trainerInfo$ | async)?.favoriteHobby?.[0] || t('no-hobby') }}</span
+      >
     </p>
     <p>
       <span>{{ t('profile-age') }} </span>
@@ -28,6 +33,14 @@
     <p *ngIf="!(trainerInfo$ | async)?.isMinor">
       <span>{{ t('profile-dui') }} </span>
       <span>{{ (trainerInfo$ | async)?.dui }}</span>
+    </p>
+
+    <p
+      *ngIf="
+        (trainerInfo$ | async)?.isMinor && (trainerInfo$ | async)?.minorityCard
+      ">
+      <span>{{ t('minority') }} </span>
+      <span class="text-large">{{ (trainerInfo$ | async)?.minorityCard }}</span>
     </p>
   </ng-container>
 </section>

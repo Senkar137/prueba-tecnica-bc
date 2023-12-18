@@ -13,15 +13,19 @@
           <div class="tc-right">
             <ng-container *ngFor="let stat of pokemon.stats">
               <div>
-                <span>{{ stat.name | titlecase }}</span>
+                <span>{{ t(stat.name) }}</span>
 
                 <mat-progress-bar
+                  [matTooltip]="stat.value.toString()"
+                  matTooltipPosition="left"
+                  matTooltipTouchGestures="auto"
                   mode="determinate"
                   style="
                     width: 32%;
-                    height: 8px;
+                    height: 12px;
                     margin-right: 24px;
                     border-radius: 16px;
+                    cursor: help;
                   "
                   [value]="stat.percentageBar || stat.value"></mat-progress-bar>
               </div>

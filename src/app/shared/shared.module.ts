@@ -20,6 +20,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ListTypesPipe } from './pipes/list-types.pipe';
 import { PokemonIdPipe } from './pipes/pokemon-id.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const pipes = [ListTypesPipe, PokemonIdPipe];
 
@@ -42,6 +43,7 @@ const modules = [
   MatPaginatorModule,
   CarouselModule,
   MatProgressBarModule,
+  MatTooltipModule,
 ];
 
 const components = [LoaderComponent, ProfileComponent];

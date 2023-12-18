@@ -43,7 +43,10 @@
       </ng-container>
 
       <div class="language-switch-container">
-        <mat-slide-toggle color="primary" (change)="toggleLanguage()">
+        <mat-slide-toggle
+          [checked]="isSpanish"
+          color="primary"
+          (change)="toggleLanguage()">
           <span *ngIf="isSpanish">ES</span>
           <span *ngIf="!isSpanish">EN</span>
         </mat-slide-toggle>

@@ -38,6 +38,11 @@ export class AppComponent {
     private localStorageService: LocalStorageService,
     private router: Router
   ) {
+    const langString = this.localStorageService.get('lang');
+    if (langString && langString === 'en') {
+      this.toggleLanguage();
+    }
+
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -68,6 +73,7 @@ export class AppComponent {
   toggleLanguage(): void {
     this.isSpanish = !this.isSpanish;
     this.translocoService.setActiveLang(this.isSpanish ? 'es' : 'en');
+    this.localStorageService.set('lang', this.isSpanish ? 'es' : 'en');
   }
 
   newTrainer(remove = true) {
@@ -78,7 +84,9 @@ export class AppComponent {
     };
     this.trainerList.push(newTrainerItem);
     this.localStorageService.set('trainerList', this.trainerList);
-    if (remove) this.removeTrainer();
+    if (remove) {
+      this.removeTrainer(true);
+    }
   }
 
   switchTrainer(trainer: TrainerItem) {
@@ -104,20 +112,16 @@ export class AppComponent {
     });
   }
 
-  removeTrainer() {
-    try {
-      if (this.trainerList.length > 0) {
-        const lastTrainer = this.trainerList.pop();
-        if (lastTrainer) {
-          this.changeTrainerUpdateState(lastTrainer);
-          this.localStorageService.set('trainerList', this.trainerList);
-        }
-      } else {
-        this.localStorageService.remove('state');
+  removeTrainer(removeAnyway = false) {
+    if (!removeAnyway && this.trainerList.length > 0) {
+      const lastTrainer = this.trainerList.pop();
+      if (lastTrainer) {
+        this.localStorageService.set('trainerList', this.trainerList);
+        this.changeTrainerUpdateState(lastTrainer);
       }
-    } catch (error) {
-      console.error(error);
+    } else {
+      this.localStorageService.remove('state');
+      window.location.reload(); //Should avoid using reload
     }
-    window.location.reload();
   }
 }

@@ -12,10 +12,10 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { loadTrainerInfoSuccess } from '../../../../core/store/actions/trainer.actions';
 import { Store } from '@ngrx/store';
-import { TrainerProfile } from '../../../../core/interfaces/trainer-profile';
 import { AppState } from '../../../../core/store/states/app.state';
 import { selectTFTrainer } from '../../../../core/store/selectors/main.selector';
 import { hasRequiredInfo } from '../../../../core/guards/trainer-registration.guard';
+import { take } from 'rxjs/operators';
 
 interface ProfileForm {
   name: string;
@@ -55,7 +55,6 @@ export class ProfileFormComponent {
   ];
 
   filteredHobbies$: Observable<string[] | null> = of(this.allHobby);
-  trainerInfo$: Observable<TrainerProfile | null>;
 
   myFilter = (d: Date | null): boolean => {
     return d !== null && d < new Date();
@@ -83,26 +82,30 @@ export class ProfileFormComponent {
       this.validateDui.bind(this),
     ]);
 
-    this.trainerInfo$ = this.store.select(selectTFTrainer);
+    this.store
+      .select(selectTFTrainer)
+      .pipe(take(1))
+      .subscribe(res => {
+        if (!!res && hasRequiredInfo(res)) {
+          if (!(res.birthdate instanceof Date)) {
+            res = {
+              ...res,
+              birthdate: new Date(res.birthdate as unknown as string),
+            };
+          }
 
-    this.trainerInfo$.subscribe(res => {
-      if (!!res && hasRequiredInfo(res)) {
-        if (!(res.birthdate instanceof Date)) {
-          res = {
-            ...res,
-            birthdate: new Date(res.birthdate as unknown as string),
-          };
+          this.profileForm.patchValue({
+            name: res.name,
+            birthdate: res.birthdate,
+            dui: res.dui,
+            minorityCard: res.minorityCard,
+          } as ProfileForm);
+
+          this.updateBirthdateInfo(res.birthdate as Date);
         }
+      });
 
-        this.profileForm.patchValue({
-          name: res.name,
-          birthdate: res.birthdate,
-          dui: res.dui,
-          minorityCard: res.minorityCard,
-        } as ProfileForm);
-
-        this.updateBirthdateInfo(res.birthdate as Date);
-      }
+    this.store.select(selectTFTrainer).subscribe(res => {
       this.isImageUploaded = !!res?.imageUrl;
     });
 

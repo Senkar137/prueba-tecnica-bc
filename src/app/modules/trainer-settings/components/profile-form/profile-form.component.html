@@ -6,6 +6,9 @@
       <mat-form-field appearance="outline" color="accent" style="width: 100%">
         <mat-label>{{ t('form-name') }}<span>*</span></mat-label>
         <input matInput type="text" formControlName="name" />
+        <mat-error *ngIf="getFormControl('name').hasError('required')">
+          {{ t('error-name') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" color="accent" style="width: 100%">
@@ -40,7 +43,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" color="accent" style="width: 100%">
-        <mat-label>{{ t('form-birth') }}</mat-label>
+        <mat-label>{{ t('form-birth') }}<span>*</span></mat-label>
         <input
           matInput
           [matDatepickerFilter]="myFilter"
@@ -48,6 +51,16 @@
           formControlName="birthdate" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="getFormControl('birthdate').hasError('required')">
+          {{ t('error-birthdate') }}
+        </mat-error>
+        <mat-error
+          *ngIf="
+            getFormControl('birthdate').hasError('matDatepickerFilter') &&
+            !getFormControl('birthdate').hasError('required')
+          ">
+          {{ t('error-birthdate-format') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field
@@ -61,6 +74,17 @@
           matInput
           type="text"
           formControlName="dui" />
+        <mat-error *ngIf="getFormControl('dui').hasError('required')">
+          {{ t('error-dui') }}
+        </mat-error>
+        <mat-error
+          *ngIf="
+            getFormControl('dui').hasError('invalidDui') &&
+            !getFormControl('dui').hasError('required') &&
+            getFormControl('dui').enabled
+          ">
+          {{ t('error-dui-format') }}
+        </mat-error>
       </mat-form-field>
 
       <ng-template #elseBlock>
@@ -70,6 +94,12 @@
         </mat-form-field>
       </ng-template>
 
+      <mat-error
+        [ngClass]="{
+          'invisible-content': !(!forceShowButton && !isImageUploaded)
+        }">
+        {{ t('error-image') }}<span>*</span>
+      </mat-error>
       <button
         [disabled]="
           !forceShowButton && (!profileForm.valid || !isImageUploaded)

@@ -20,7 +20,13 @@
     "form-hobby": "Favorite Hobby",
     "form-birth": "Birthday",
     "form-dui": "DUI",
-    "form-minority": "Minority Card"
+    "form-minority": "Minority Card",
+    "error-name": "The name is required.",
+    "error-birthdate": "The birthday field is required.",
+    "error-birthdate-format": "You have to enter a valid date (A date before today)",
+    "error-dui": "The DUI field is required.",
+    "error-dui-format": "You have to provide a valid DUI",
+    "error-image": "You have to upload a profile image"
   },
   "team-formation": {
     "title": "We're almost done!",

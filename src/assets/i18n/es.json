@@ -20,7 +20,13 @@
     "form-hobby": "Pasatiempo favorito",
     "form-birth": "Cumpleaños",
     "form-dui": "DUI",
-    "form-minority": "Carnet de Minoridad"
+    "form-minority": "Carnet de Minoridad",
+    "error-name": "El nombre es obligatorio.",
+    "error-birthdate": "El campo cumpleaños es obligatorio.",
+    "error-birthdate-format": "Tienes que colocar una fecha valida (Anterior al dia de hoy)",
+    "error-dui": "El campo DUI es obligatorio.",
+    "error-dui-format": "Tienes que colocar un DUI valido",
+    "error-image": "Tienes que subir una imagen de perfil"
   },
   "team-formation": {
     "title": "¡Ya casi términamos!",

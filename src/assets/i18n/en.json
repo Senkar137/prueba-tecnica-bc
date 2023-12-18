@@ -1,5 +1,6 @@
 {
   "loading": "Loading...",
+  "error": "No pokemon found.",
   "trainer-menu": {
     "discard": "Discard me",
     "new": "New trainer",

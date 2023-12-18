@@ -1,5 +1,6 @@
 {
   "loading": "Cargando...",
+  "error": "No se encontró pokemons.",
   "trainer-menu": {
     "discard": "Descartarme",
     "new": "Nuevo entrenador",

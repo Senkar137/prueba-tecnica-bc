@@ -100,7 +100,7 @@ export class AppComponent {
 
     this.localStorageService.set('state', newState);
     this.router.navigate(['/update-profile']).then(() => {
-      window.location.reload();
+      window.location.reload(); //Should avoid using reload
     });
   }
 

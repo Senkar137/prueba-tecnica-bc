@@ -14,6 +14,11 @@ export const selectPLFLoading = createSelector(
   state => state.loading
 );
 
+export const selectPLFError = createSelector(
+  selectPokemonListFeature,
+  state => !!state.error
+);
+
 export const selectTFTrainer = createSelector(
   selectTrainerFeature,
   state => state.trainer

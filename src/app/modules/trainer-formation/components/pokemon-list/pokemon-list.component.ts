@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadPokemonList } from '../../../../core/store/actions/pokemon-list.actions';
+import {
+  loadPokemonList,
+  loadPokemonListFailure,
+  loadPokemonListSearch,
+} from '../../../../core/store/actions/pokemon-list.actions';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { PokemonDetails } from '../../../../core/interfaces/pokemon-details';
@@ -9,8 +13,10 @@ import { Router } from '@angular/router';
 import { LoaderPokeBallService } from '../../../../core/services/loader-pokeball.service';
 import { AppState } from '../../../../core/store/states/app.state';
 import {
+  selectPLFError,
   selectPLFList,
   selectPLFLoading,
+  selectPokemonListFeature,
   selectPTFTeam,
 } from '../../../../core/store/selectors/main.selector';
 
@@ -26,6 +32,10 @@ export class PokemonListComponent implements OnInit {
   teamMembersId: number[] = [];
   isFullTeam = false;
 
+  valueSearch: string | number = '';
+  countList? = 9;
+  searchError = false;
+
   constructor(
     private loaderPokeBallService: LoaderPokeBallService,
     private router: Router,
@@ -39,6 +49,14 @@ export class PokemonListComponent implements OnInit {
     this.pokemonTeam$.subscribe(res => {
       this.teamMembersId = res.map(item => item.id || 0);
       this.isFullTeam = this.teamMembersId.length === 3;
+    });
+
+    this.store.select(selectPokemonListFeature).subscribe(res => {
+      this.countList = res.list?.count;
+    });
+
+    this.store.select(selectPLFError).subscribe(res => {
+      this.searchError = res;
     });
   }
 
@@ -54,6 +72,11 @@ export class PokemonListComponent implements OnInit {
   }
 
   changePage(event: PageEvent) {
+    if (this.searchError) {
+      this.store.dispatch(loadPokemonListFailure({ error: null }));
+    }
+    this.valueSearch = '';
+
     this.store.dispatch(
       loadPokemonList({
         limit: event.pageIndex === 16 ? 7 : 9,
@@ -73,5 +96,31 @@ export class PokemonListComponent implements OnInit {
     if (this.isFullTeam) {
       this.router.navigate(['/trainer-profile']);
     }
+  }
+
+  searchPokemon(event: Event) {
+    event.preventDefault();
+    if (this.searchError) {
+      this.store.dispatch(loadPokemonListFailure({ error: null }));
+    }
+
+    if (
+      typeof this.valueSearch === 'string' &&
+      this.valueSearch.trim().length === 0
+    ) {
+      if (!this.countList) {
+        this.store.dispatch(loadPokemonList({ limit: 9, offset: 0 }));
+      }
+      return;
+    }
+
+    if (!isNaN(Number(this.valueSearch))) {
+      this.store.dispatch(
+        loadPokemonListSearch({ search: Number(this.valueSearch) })
+      );
+      return;
+    }
+
+    this.store.dispatch(loadPokemonListSearch({ search: this.valueSearch }));
   }
 }

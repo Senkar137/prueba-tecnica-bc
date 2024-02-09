@@ -20,7 +20,7 @@
     color: #AAAAAA;
   }
 
-  button{
+  .save-button{
     align-self: center;
     max-width: 55%;
     min-width: 45%;
@@ -89,4 +89,61 @@
 
 .example-item {
   height: 50px;
+}
+
+// aaa --------------------------------------------------------------------------------------------
+
+.search-form {
+  border-radius: 40px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background: #cdcdcd;
+  margin-bottom: 16px;
+
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &.focus {
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.search-input {
+  flex: 10;
+
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+
+  background: none;
+  color: #5a6674;
+  border: none;
+  appearance: none;
+  outline: none;
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+}
+
+.search-button {
+  flex: 1;
+  margin: 8px 0;
+  border: none;
+  background: none;
+  outline: none !important;
+
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.margin-button{
+  margin-top: 64px;
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoaderService } from './loader.service';
+import { LoaderPokeballService } from './loader-pokeball.service';
 
 describe('LoaderService', () => {
-  let service: LoaderService;
+  let service: LoaderPokeballService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LoaderService);
+    service = TestBed.inject(LoaderPokeballService);
   });
 
   it('should be created', () => {

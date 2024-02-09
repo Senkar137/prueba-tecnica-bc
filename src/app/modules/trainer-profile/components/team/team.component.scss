@@ -4,25 +4,43 @@
   min-width: 732px;
   height: 100%;
 
+}
+
+.head{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 24px;
+
   h3{
     font-family: Poppins, sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 48px;
     color: #01426A;
+    margin: 0 32px 0 0;
   }
 }
 
 .team-container{
   width: 100%;
-  height: 500px;
+  height: 532px;
   overflow: auto;
+  padding-right: 24px;
+
+  >div{
+    margin: 24px 0;
+  }
+  >:first-child{
+    margin: 0 0 24px;
+  }
+  >:last-child{
+    margin: 24px 0 0;
+  }
 }
 
 .team-item{
   width: 100%;
-  margin: 24px 0;
-
   border-radius: 15px;
   box-shadow: 0px 8px 28px 0px #78B1B51A;
   background-color: #F2F2F2;
@@ -40,9 +58,9 @@
 }
 
 .tc-left{
-  img{
-    width: 170.24px;
-    height: 186px;
+  flex: 5;
+  img {
+    width: 232px;
   }
 
   h4{
@@ -51,6 +69,7 @@
     font-weight: 700;
     line-height: 45px;
     color: #000000;
+    margin-bottom: 0;
   }
 
   p{
@@ -63,12 +82,29 @@
 }
 
 .tc-right{
-  span{
-    font-family: Poppins, sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 30px;
-    color: #4B4B4B;
-    margin: 0 12px;
+  flex: 6;
+
+  div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 12px 4px 2px;
   }
+
+  div span{
+      font-family: Poppins, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+      color: #4B4B4B;
+
+  }
+}
+
+::ng-deep .mat-tooltip {
+  background-color: #3d3d47;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
 }

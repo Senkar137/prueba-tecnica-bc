@@ -1,12 +1,15 @@
 .head{
-  margin: 32px 0 0 72px;
+  margin: 32px 0 24px 192px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
   h1{
     font-size: 35px;
     font-weight: 600;
     line-height: 53px;
     letter-spacing: 0;
-    color: #185A7D;
+    margin: 0 45px 0 0;
   }
 
   p{

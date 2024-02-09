@@ -1,37 +1,61 @@
 {
   "loading": "Loading...",
+  "error": "No pokemon found.",
+  "trainer-menu": {
+    "discard": "Discard me",
+    "new": "New trainer",
+    "switch": "Switch trainer"
+  },
   "trainer-settings": {
-    "title": "¡Hello! Let's set up your profile",
+    "title": "Hi! Let's set up your profile",
+    "alter-title": "Update your profile",
     "message": "We want to know you better.",
+    "alter-message": "You can edit the information you have entered.",
     "select-image-title": "Profile image",
     "select-image-dropbox": "Attach a photo",
     "form-title": "Your Information",
     "form-message": "Complete the following information to fill out your profile",
     "form-continue": "Continue",
+    "form-continue-alter": "Update",
     "form-name": "Name",
     "form-hobby": "Favorite Hobby",
     "form-birth": "Birthday",
     "form-dui": "DUI",
-    "form-minority": "Minority Card"
+    "form-minority": "Minority Card",
+    "error-name": "The name is required.",
+    "error-birthdate": "The birthday field is required.",
+    "error-birthdate-format": "You have to enter a valid date (A date before today)",
+    "error-dui": "The DUI field is required.",
+    "error-dui-format": "You have to provide a valid DUI",
+    "error-image": "You have to upload a profile image"
   },
   "team-formation": {
     "title": "We're almost done!",
+    "alter-title": "Edit the formation of your Pokémon team",
     "message": "Review the information and complete the requested details.",
     "card-trainer": "Trainer",
     "profile-hobby": "Hobby:",
     "profile-age": "Age:",
     "age": "years old",
     "profile-dui": "DUI:",
+    "minority": "Minority Card:",
     "list-title": "Pokémon",
     "list-message": "Select 3 Pokémon to be part of your team",
     "list-save": "Save",
-    "list-search-placeholder": "Search by index, name..."
+    "list-search-placeholder": "Search by index, name...",
+    "no-hobby": "No one"
   },
   "trainer-profile": {
-    "title-name": "¡Hi ",
+    "title-name": "Hi ",
     "card-trainer": "Trainer",
     "team-title": "My Pokémon",
     "edit-profile": "Edit profile",
-    "edit-team": "Edit"
+    "edit-team": "Edit",
+    "hp": "HP",
+    "attack": "Attack",
+    "defense": "Defense",
+    "special-attack": "Special Attack",
+    "special-defense": "Special Defense",
+    "speed": "Speed"
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
-export class LoaderService {
+export class LoaderPokeBallService {
   private loaderSubject = new Subject<boolean>();
   loader$: Observable<boolean> = this.loaderSubject.asObservable();
 

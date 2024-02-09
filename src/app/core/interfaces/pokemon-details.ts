@@ -8,6 +8,15 @@ export interface PokemonDetails {
 }
 
 export interface PokemonStats {
-  name: string;
+  name: StatName;
   value: number;
+  percentageBar?: number | null;
 }
+
+export type StatName =
+  | 'hp'
+  | 'attack'
+  | 'defense'
+  | 'special-attack'
+  | 'special-defense'
+  | 'speed';

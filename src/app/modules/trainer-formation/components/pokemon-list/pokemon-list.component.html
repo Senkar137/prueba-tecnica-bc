@@ -3,11 +3,23 @@
     <h3>{{ t('list-title') }}</h3>
     <p>{{ t('list-message') }}</p>
 
+    <form class="search-form" (submit)="searchPokemon($event)">
+      <button type="submit" class="search-button">
+        <mat-icon>search</mat-icon>
+      </button>
+      <input
+        type="search"
+        value=""
+        name="searchPoke"
+        [(ngModel)]="valueSearch"
+        [placeholder]="t('list-search-placeholder')"
+        class="search-input" />
+    </form>
+
     <div
       class="pokemon-list-container"
-      *ngIf="(loading$ | async) === false; else elseBlock">
-      <ng-container
-        *ngFor="let pokemon of (pokemonList$ | async)?.results; index as i">
+      *ngIf="!(searchError || (loading$ | async) === true); else elseBlock">
+      <ng-container *ngFor="let pokemon of pokemonList$ | async; index as i">
         <div
           class="rectangle"
           [ngClass]="{
@@ -19,7 +31,7 @@
           <img [src]="pokemon.sprite" [alt]="pokemon.name + ' sprint front'" />
           <p>
             <span>{{ pokemon.id | pokemonId }}</span>
-            <span>{{ pokemon.name }}</span>
+            <span>{{ pokemon.name | titlecase }}</span>
           </p>
         </div>
       </ng-container>
@@ -33,11 +45,14 @@
           align-items: center;
           height: 339px;
         ">
-        <h3 style="text-align: center">{{ 'loading' | transloco }}</h3>
+        <h3 style="text-align: center">
+          {{ (searchError ? 'error' : 'loading') | transloco }}
+        </h3>
       </div>
     </ng-template>
 
     <mat-paginator
+      *ngIf="!!this.countList"
       hidePageSize="true"
       [length]="151"
       [pageSize]="9"
@@ -46,6 +61,8 @@
     </mat-paginator>
 
     <button
+      class="save-button"
+      [ngClass]="{ 'margin-button': !this.countList && !searchError }"
       [disabled]="!isFullTeam"
       mat-flat-button
       color="accent"

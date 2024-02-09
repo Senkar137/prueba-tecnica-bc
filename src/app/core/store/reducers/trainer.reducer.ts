@@ -1,4 +1,3 @@
-// pokemon.state.ts
 import { createReducer, on } from '@ngrx/store';
 import {
   loadTrainerInfo,
@@ -28,8 +27,8 @@ export const trainerReducer = createReducer(
   on(loadTrainerInfoSuccess, (state, { info }) => ({
     ...state,
     trainer: {
+      ...state.trainer,
       ...info,
-      imageUrl: state.trainer ? state.trainer.imageUrl : info.imageUrl,
     },
     loading: false,
   })),
@@ -39,9 +38,9 @@ export const trainerReducer = createReducer(
     loading: false,
   })),
   on(loadTrainerImage, state => ({ ...state, loading: true })),
-  on(loadTrainerImageSuccess, (state, { image }) => ({
+  on(loadTrainerImageSuccess, (state, { image, name }) => ({
     ...state,
-    trainer: { ...state.trainer, imageUrl: image },
+    trainer: { ...state.trainer, imageUrl: image, imageName: name },
     loading: false,
   })),
   on(loadTrainerImageFailure, (state, { error }) => ({

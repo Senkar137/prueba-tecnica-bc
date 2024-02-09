@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PokemonTeamState } from '../../../../core/store/reducers/pokemon-team.reducer';
 import { Observable } from 'rxjs';
 import { PokemonDetails } from '../../../../core/interfaces/pokemon-details';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { selectPTFTeam } from '../../../../core/store/selectors/main.selector';
+import { AppState } from '../../../../core/store/states/app.state';
 
 @Component({
   selector: 'app-team',
@@ -31,7 +32,7 @@ export class TeamComponent {
     autoWidth: true,
   };
 
-  constructor(private store: Store<{ pokemonTeam: PokemonTeamState }>) {
-    this.pokemonTeam$ = this.store.select('pokemonTeam', 'team');
+  constructor(private store: Store<AppState>) {
+    this.pokemonTeam$ = this.store.select(selectPTFTeam);
   }
 }

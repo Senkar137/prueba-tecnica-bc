@@ -1,11 +1,11 @@
 <ng-container *transloco="let t; read: 'trainer-settings'">
   <div class="head-settings">
-    <h1>{{ t('title') }}</h1>
-    <p>{{ t('message') }}</p>
+    <h1>{{ isNotEdit ? t('title') : t('alter-title') }}</h1>
+    <p>{{ isNotEdit ? t('message') : t('alter-message') }}</p>
   </div>
 </ng-container>
 
 <div class="settings-container">
   <app-select-profile-image></app-select-profile-image>
-  <app-profile-form></app-profile-form>
+  <app-profile-form [isNotEdit]="isNotEdit"></app-profile-form>
 </div>
